@@ -1,0 +1,1461 @@
+USE [BDHIS_MINSA]
+GO
+/****** Object:  Table [dbo].[MAESTRO_HIS_ACTIVIDAD_HIS]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MAESTRO_HIS_ACTIVIDAD_HIS](
+	[Id_Actividad_His] [varchar](6) NOT NULL,
+	[Descripcion_Actividad_His] [varchar](500) NULL,
+	[Fg_Estado] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MAESTRO_HIS_CENTRO_POBLADO]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MAESTRO_HIS_CENTRO_POBLADO](
+	[Id_Centro_Poblado] [varchar](10) NOT NULL,
+	[Descripcion_Centro_Poblado] [varchar](350) NULL,
+	[Id_Codigo_Centro_Poblado] [varchar](4) NULL,
+	[Id_Ubigueo] [varchar](6) NULL,
+	[Altidud] [decimal](7, 2) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MAESTRO_HIS_CIE_CPMS]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MAESTRO_HIS_CIE_CPMS](
+	[Codigo_Item] [varchar](10) NOT NULL,
+	[Descripcion_Item] [varchar](400) NULL,
+	[Fg_Tipo] [varchar](2) NULL,
+	[Descripcion_Tipo_Item] [varchar](100) NULL,
+	[Fg_Estado] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MAESTRO_HIS_COLEGIO]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MAESTRO_HIS_COLEGIO](
+	[Id_Colegio] [varchar](2) NOT NULL,
+	[Descripcion_Colegio] [varchar](800) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MAESTRO_HIS_CONDICION_CONTRATO]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MAESTRO_HIS_CONDICION_CONTRATO](
+	[Id_Condicion] [int] NOT NULL,
+	[Descripcion_Condicion] [varchar](500) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MAESTRO_HIS_DOSIS]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MAESTRO_HIS_DOSIS](
+	[id_dosis] [int] NOT NULL,
+	[desc_dosis] [varchar](50) NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MAESTRO_HIS_ESTABLECIMIENTO]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MAESTRO_HIS_ESTABLECIMIENTO](
+	[Id_Establecimiento] [int] NOT NULL,
+	[Nombre_Establecimiento] [varchar](100) NULL,
+	[Ubigueo_Establecimiento] [char](6) NULL,
+	[Codigo_Disa] [int] NULL,
+	[Disa] [varchar](80) NULL,
+	[Codigo_Red] [char](2) NULL,
+	[Red] [varchar](70) NULL,
+	[Codigo_MicroRed] [char](2) NULL,
+	[MicroRed] [varchar](70) NULL,
+	[Codigo_Unico] [varchar](9) NOT NULL,
+	[Codigo_Sector] [int] NULL,
+	[Descripcion_Sector] [varchar](50) NULL,
+	[Departamento] [varchar](150) NULL,
+	[Provincia] [varchar](150) NULL,
+	[Distrito] [varchar](150) NULL,
+	[Categoria_Establecimiento] [varchar](10) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MAESTRO_HIS_ETNIA]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MAESTRO_HIS_ETNIA](
+	[Id_Etnia] [char](2) NOT NULL,
+	[Descripcion_Etnia] [varchar](100) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MAESTRO_HIS_FINANCIADOR]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MAESTRO_HIS_FINANCIADOR](
+	[Id_Financiador] [varchar](2) NOT NULL,
+	[Descripcion_Financiador] [varchar](100) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MAESTRO_HIS_INSTITUCION_EDUCATIVA]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MAESTRO_HIS_INSTITUCION_EDUCATIVA](
+	[Id_Institucion_Edu] [int] NOT NULL,
+	[Ubigeo_Institucion_Edu] [varchar](6) NULL,
+	[Codigo_Modular] [varchar](7) NULL,
+	[Descripcion_Institucion_Edu] [varchar](550) NULL,
+	[Direccion] [varchar](320) NULL,
+	[Descripcion_Nivel] [varchar](300) NULL,
+	[Descripcion_Area] [varchar](50) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MAESTRO_HIS_OTRA_CONDICION]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MAESTRO_HIS_OTRA_CONDICION](
+	[Id_Otra_Condicion] [int] NOT NULL,
+	[Descripcion_Otra_Condicion] [varchar](300) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MAESTRO_HIS_PAIS]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MAESTRO_HIS_PAIS](
+	[Id_Pais] [varchar](3) NOT NULL,
+	[Descripcion_Pais] [varchar](300) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MAESTRO_HIS_PROFESION]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MAESTRO_HIS_PROFESION](
+	[Id_Profesion] [varchar](2) NOT NULL,
+	[Descripcion_Profesion] [varchar](200) NULL,
+	[Id_Colegio] [varchar](2) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MAESTRO_HIS_SISTEMA]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MAESTRO_HIS_SISTEMA](
+	[Id_Sistema] [int] NOT NULL,
+	[Descripcion_Sistema] [varchar](8000) NULL,
+	[Lote_General] [varchar](3) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MAESTRO_HIS_TIPO_DOC]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MAESTRO_HIS_TIPO_DOC](
+	[Id_Tipo_Documento] [int] NOT NULL,
+	[Abrev_Tipo_Doc] [varchar](20) NULL,
+	[Descripcion_Tipo_Documento] [varchar](250) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MAESTRO_HIS_UBIGEO_INEI_RENIEC]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MAESTRO_HIS_UBIGEO_INEI_RENIEC](
+	[Id_Ubigueo_Inei] [varchar](6) NOT NULL,
+	[Id_Ubigueo_Reniec] [varchar](6) NOT NULL,
+	[Departamento] [varchar](100) NOT NULL,
+	[Provincia] [varchar](100) NOT NULL,
+	[Distrito] [varchar](100) NOT NULL,
+	[Codigo_Departamento_Inei] [char](2) NULL,
+	[Codigo_Provincia_Inei] [char](2) NULL,
+	[Codigo_Distrito_Inei] [char](2) NULL,
+	[Codigo_Departamento_Reniec] [varchar](2) NULL,
+	[Codigo_Provincia_Reniec] [varchar](2) NULL,
+	[Codigo_Distrito_Reniec] [varchar](2) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MAESTRO_HIS_UPS]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MAESTRO_HIS_UPS](
+	[Id_Ups] [varchar](6) NOT NULL,
+	[Descripcion_Ups] [varchar](800) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TBL_HISTORIAL_ACTUALIZACIONES_SCRIPT]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TBL_HISTORIAL_ACTUALIZACIONES_SCRIPT](
+	[I_ID] [int] IDENTITY(1,1) NOT NULL,
+	[V_ID_IDENTIFICADOR_ACTUALIZACION] [varchar](100) NOT NULL,
+	[V_DESCRIPCION_ACTUALIZACION] [varchar](250) NOT NULL,
+	[D_FECHA_EJECUCION] [datetime] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TRAMA_INTEGRACION]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TRAMA_INTEGRACION](
+	[I_ID] [int] IDENTITY(1,1) NOT NULL,
+	[V_CITA_ORIGEN] [varchar](30) NULL,
+	[V_CITA_NUMERO_AFILIACION] [varchar](15) NULL,
+	[V_CITA_FECHA_ATENCION] [varchar](8) NULL,
+	[V_CITA_ITEMS_CODIGO] [varchar](15) NULL,
+	[V_CITA_ITEMS_TIPO_DIAGNOSTICO] [varchar](1) NULL,
+	[V_CITA_ITEMS_VALOR_LAB_1] [varchar](3) NULL,
+	[V_CITA_ITEMS_VALOR_LAB_2] [varchar](3) NULL,
+	[V_CITA_ITEMS_VALOR_LAB_3] [varchar](3) NULL,
+	[V_CITA_ID_UPS] [varchar](6) NULL,
+	[I_CITA_CODIGO_ESTABLECIMIENTO] [int] NULL,
+	[I_CITA_DIA_EDAD] [int] NULL,
+	[I_CITA_MES_EDAD] [int] NULL,
+	[I_CITA_ANNIO_EDAD] [int] NULL,
+	[I_CITA_EDAD_REGISTRO] [int] NULL,
+	[V_CITA_ID_TIPO_EDAD_REGISTRO] [varchar](1) NULL,
+	[V_CITA_ID_TURNO] [varchar](1) NULL,
+	[I_CITA_FGDIG] [int] NOT NULL,
+	[I_CITA_COMPONENTE] [int] NULL,
+	[V_CITA_ID_FINANCIADOR] [varchar](2) NULL,
+	[I_CITA_OTRA_CONDICION] [int] NULL,
+	[V_CITA_FECHA_ULTIMA_REGLA] [varchar](8) NULL,
+	[V_CITA_ESTADO_REGISTRO] [varchar](1) NOT NULL,
+	[D_CITA_EXAMENFISICO_PESO] [decimal](7, 2) NULL,
+	[D_CITA_EXAMENFISICO_TALLA] [decimal](7, 2) NULL,
+	[D_CITA_EXAMENFISICO_HEMOGLOBINA] [decimal](4, 2) NULL,
+	[D_CITA_EXAMENFISICO_PER_ABDOMINAL] [decimal](7, 2) NULL,
+	[D_CITA_EXAMENFISICO_PER_CEFALICO] [decimal](4, 2) NULL,
+	[I_PEREGISTRA_ID_TIPODOC] [int] NULL,
+	[V_PEREGISTRA_NRO_DOCUMENTO] [varchar](8) NULL,
+	[V_PEREGISTRA_APEPATERNO] [varchar](50) NULL,
+	[V_PEREGISTRA_APEMATERNO] [varchar](50) NULL,
+	[V_PEREGISTRA_NOMBRES] [varchar](150) NULL,
+	[V_PEREGISTRA_SEXO] [varchar](1) NULL,
+	[V_PEREGISTRA_FECHA_NACIMIENTO] [varchar](8) NULL,
+	[V_PEREGISTRA_ID_PROFESION] [varchar](2) NULL,
+	[V_PEREGISTRA_ID_PAIS] [varchar](3) NULL,
+	[V_PEREGISTRA_CONDICION] [varchar](2) NULL,
+	[V_PEREGISTRA_ID_FLAG] [varchar](1) NULL,
+	[I_PEATIENDE_ID_TIPODOC] [int] NULL,
+	[V_PEATIENDE_NRO_DOCUMENTO] [varchar](8) NULL,
+	[V_PEATIENDE_APEPATERNO] [varchar](50) NULL,
+	[V_PEATIENDE_APEMATERNO] [varchar](50) NULL,
+	[V_PEATIENDE_NOMBRES] [varchar](150) NULL,
+	[V_PEATIENDE_SEXO] [varchar](1) NULL,
+	[V_PEATIENDE_FECHA_NACIMIENTO] [varchar](8) NULL,
+	[V_PEATIENDE_ID_PROFESION] [varchar](2) NULL,
+	[V_PEATIENDE_ID_PAIS] [varchar](3) NULL,
+	[V_PEATIENDE_CONDICION] [varchar](2) NULL,
+	[V_PEATIENDE_ID_FLAG] [varchar](1) NULL,
+	[I_PACIENTE_ID_TIPODOC] [int] NULL,
+	[V_PACIENTE_NRO_DOCUMENTO] [varchar](20) NULL,
+	[V_PACIENTE_NRO_HC] [varchar](15) NULL,
+	[V_PACIENTE_APEPATERNO] [varchar](50) NULL,
+	[V_PACIENTE_APEMATERNO] [varchar](50) NULL,
+	[V_PACIENTE_NOMBRES] [varchar](150) NULL,
+	[V_PACIENTE_SEXO] [varchar](1) NULL,
+	[V_PACIENTE_FECHA_NACIMIENTO] [varchar](8) NULL,
+	[V_PACIENTE_ID_PAIS] [varchar](3) NULL,
+	[V_PACIENTE_ID_ETNIA] [varchar](2) NULL,
+	[I_PACIENTE_CODIGO_ESTABLECIMIENTO] [int] NULL,
+	[V_PACIENTE_ID_FLAG] [varchar](1) NULL,
+	[I_ESTADO] [int] NOT NULL,
+	[V_DESCRIPCION_RESPUESTA] [varchar](250) NULL,
+	[D_FECHA_REGISTRO] [datetime] NOT NULL,
+	[D_FECHA_PROCESAMIENTO] [datetime] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TRAMA_INTEGRACION_CITA]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TRAMA_INTEGRACION_CITA](
+	[I_ID] [int] IDENTITY(1,1) NOT NULL,
+	[V_CITA_ORIGEN] [varchar](30) NULL,
+	[V_JSON] [varchar](max) NULL,
+	[I_ESTADO] [int] NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TRAMA_INTEGRACION_CITA_DX]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TRAMA_INTEGRACION_CITA_DX](
+	[V_CITA_ORIGEN] [varchar](30) NULL,
+	[V_CITA_ITEMS_CODIGO] [varchar](15) NULL,
+	[V_CITA_ITEMS_TIPO_DIAGNOSTICO] [varchar](1) NULL,
+	[V_CITA_ITEMS_VALOR_LAB_1] [varchar](3) NULL,
+	[V_CITA_ITEMS_VALOR_LAB_2] [varchar](3) NULL,
+	[V_CITA_ITEMS_VALOR_LAB_3] [varchar](3) NULL,
+	[V_JSON] [varchar](max) NULL,
+	[I_ESTADO] [int] NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TRAMA_INTEGRACION_DX_CITA]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TRAMA_INTEGRACION_DX_CITA](
+	[V_CITA_ORIGEN] [varchar](30) NULL,
+	[V_JSON] [varchar](max) NULL,
+	[I_ESTADO] [int] NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TRAMA_INTEGRACION_DX_CITA_TMP]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TRAMA_INTEGRACION_DX_CITA_TMP](
+	[V_CITA_ORIGEN] [varchar](30) NULL,
+	[V_JSON] [varchar](max) NULL,
+	[I_ESTADO] [int] NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TRAMA_INTEGRACION_HISMINSA_JSON]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TRAMA_INTEGRACION_HISMINSA_JSON](
+	[I_ID] [int] IDENTITY(1,1) NOT NULL,
+	[V_CITA_ORIGEN] [varchar](30) NULL,
+	[V_JSON] [varchar](max) NULL,
+	[I_ESTADO] [int] NOT NULL,
+	[I_ID_CITA] [int] NULL,
+	[V_DESCRIPCION_RESPUESTA] [varchar](250) NULL,
+	[D_FECHA_REGISTRO] [datetime] NOT NULL,
+	[D_FECHA_PROCESAMIENTO] [datetime] NULL,
+ CONSTRAINT [AK_V_CITA_ORIGEN] UNIQUE NONCLUSTERED
+(
+	[V_CITA_ORIGEN] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TRAMA_INTEGRACION_PACIENTE]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TRAMA_INTEGRACION_PACIENTE](
+	[V_CITA_ORIGEN] [varchar](30) NULL,
+	[V_JSON] [varchar](max) NULL,
+	[I_ESTADO] [int] NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TRAMA_INTEGRACION_PERSONAL_REGISTRA_ATIENDE]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TRAMA_INTEGRACION_PERSONAL_REGISTRA_ATIENDE](
+	[V_CITA_ORIGEN] [varchar](30) NULL,
+	[V_JSON] [varchar](max) NULL,
+	[I_ESTADO] [int] NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[TRAMA_INTEGRACION] ADD  DEFAULT ((21)) FOR [I_CITA_FGDIG]
+GO
+ALTER TABLE [dbo].[TRAMA_INTEGRACION] ADD  DEFAULT ('A') FOR [V_CITA_ESTADO_REGISTRO]
+GO
+ALTER TABLE [dbo].[TRAMA_INTEGRACION] ADD  DEFAULT ((0)) FOR [I_ESTADO]
+GO
+ALTER TABLE [dbo].[TRAMA_INTEGRACION] ADD  DEFAULT (getdate()) FOR [D_FECHA_REGISTRO]
+GO
+ALTER TABLE [dbo].[TRAMA_INTEGRACION_CITA] ADD  DEFAULT ((0)) FOR [I_ESTADO]
+GO
+ALTER TABLE [dbo].[TRAMA_INTEGRACION_CITA_DX] ADD  DEFAULT ((0)) FOR [I_ESTADO]
+GO
+ALTER TABLE [dbo].[TRAMA_INTEGRACION_DX_CITA] ADD  DEFAULT ((0)) FOR [I_ESTADO]
+GO
+ALTER TABLE [dbo].[TRAMA_INTEGRACION_DX_CITA_TMP] ADD  DEFAULT ((0)) FOR [I_ESTADO]
+GO
+ALTER TABLE [dbo].[TRAMA_INTEGRACION_HISMINSA_JSON] ADD  DEFAULT ((0)) FOR [I_ESTADO]
+GO
+ALTER TABLE [dbo].[TRAMA_INTEGRACION_HISMINSA_JSON] ADD  DEFAULT (getdate()) FOR [D_FECHA_REGISTRO]
+GO
+ALTER TABLE [dbo].[TRAMA_INTEGRACION_PACIENTE] ADD  DEFAULT ((0)) FOR [I_ESTADO]
+GO
+ALTER TABLE [dbo].[TRAMA_INTEGRACION_PERSONAL_REGISTRA_ATIENDE] ADD  DEFAULT ((0)) FOR [I_ESTADO]
+GO
+/****** Object:  StoredProcedure [dbo].[EXPORT_GALENHOS_HISMINSA]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[EXPORT_GALENHOS_HISMINSA]
+WITH EXECUTE AS CALLER
+AS
+/**
+	INSERTA EN TRAMA_INTEGRACION LOS REGISTROS GENERADOS EN LA ATENCION DE LA BD SIGH
+*/
+INSERT INTO
+	BDHIS_MINSA.dbo.TRAMA_INTEGRACION
+	(
+	V_CITA_ITEMS_CODIGO,
+	V_CITA_ORIGEN, V_CITA_NUMERO_AFILIACION, V_CITA_FECHA_ATENCION,V_CITA_ITEMS_TIPO_DIAGNOSTICO,/*C_CITA_ITEMS_VALOR_LAB_1, C_CITA_ITEMS_VALOR_LAB_2, C_CITA_ITEMS_VALOR_LAB_3,*/
+	V_CITA_ID_UPS, I_CITA_CODIGO_ESTABLECIMIENTO,
+	I_CITA_DIA_EDAD, I_CITA_MES_EDAD, I_CITA_ANNIO_EDAD, I_CITA_EDAD_REGISTRO, V_CITA_ID_TIPO_EDAD_REGISTRO,
+	V_CITA_ID_TURNO, I_CITA_FGDIG, I_CITA_COMPONENTE,V_CITA_ID_FINANCIADOR, I_CITA_OTRA_CONDICION,V_CITA_FECHA_ULTIMA_REGLA, V_CITA_ESTADO_REGISTRO,
+	D_CITA_EXAMENFISICO_PESO, D_CITA_EXAMENFISICO_TALLA,D_CITA_EXAMENFISICO_HEMOGLOBINA, D_CITA_EXAMENFISICO_PER_ABDOMINAL, D_CITA_EXAMENFISICO_PER_CEFALICO,
+	I_PEREGISTRA_ID_TIPODOC, V_PEREGISTRA_NRO_DOCUMENTO,V_PEREGISTRA_APEPATERNO, V_PEREGISTRA_APEMATERNO, V_PEREGISTRA_NOMBRES, V_PEREGISTRA_SEXO, V_PEREGISTRA_FECHA_NACIMIENTO, V_PEREGISTRA_ID_PROFESION,V_PEREGISTRA_ID_PAIS, V_PEREGISTRA_CONDICION, V_PEREGISTRA_ID_FLAG,
+	I_PEATIENDE_ID_TIPODOC, V_PEATIENDE_NRO_DOCUMENTO, V_PEATIENDE_APEPATERNO,V_PEATIENDE_APEMATERNO, V_PEATIENDE_NOMBRES, V_PEATIENDE_SEXO, V_PEATIENDE_FECHA_NACIMIENTO, V_PEATIENDE_ID_PROFESION, V_PEATIENDE_ID_PAIS,V_PEATIENDE_CONDICION, V_PEATIENDE_ID_FLAG,
+	I_PACIENTE_ID_TIPODOC,V_PACIENTE_NRO_DOCUMENTO, V_PACIENTE_NRO_HC, V_PACIENTE_APEPATERNO, V_PACIENTE_APEMATERNO,V_PACIENTE_NOMBRES, V_PACIENTE_SEXO, V_PACIENTE_FECHA_NACIMIENTO, V_PACIENTE_ID_PAIS, V_PACIENTE_ID_ETNIA, I_PACIENTE_CODIGO_ESTABLECIMIENTO, V_PACIENTE_ID_FLAG
+	)
+SELECT
+	distinct codigoCIEsinPto AS V_CITA_ITEMS_CODIGO,
+
+---***INICIO DE DATOS DE LA ATENCION
+	sigh.dbo.Atenciones.IdAtencion AS V_CITA_ORIGEN,
+	--SIGH_EXTERNA.dbo.SisFiliaciones.AfiliacionNroFormato AS V_CITA_NUMERO_AFILIACION,
+	SIGH_EXTERNA.dbo.SisFuaAtencion.AfiliacionNroFormato AS V_CITA_NUMERO_AFILIACION,
+	CONVERT(NVARCHAR(20), sigh.dbo.Atenciones.FechaIngreso, 112) AS V_CITA_FECHA_ATENCION,
+	sigh.dbo.SubclasificacionDiagnosticos.Codigo AS C_CITA_ITEMS_TIPO_DIAGNOSTICO,
+
+--	sigh.dbo.AtencionesDiagnosticos.labConfHIS AS C_CITA_ITEMS_VALOR_LAB_1,
+--	NULL AS C_CITA_ITEMS_VALOR_LAB_2,
+--	NULL AS C_CITA_ITEMS_VALOR_LAB_3,
+---***INICIO DE DATOS DEL ESTABLECMIENTO
+	sigh.dbo.Servicios.codigoServicioHIS AS V_CITA_ID_UPS,
+	000035125 AS I_CITA_CODIGO_ESTABLECIMIENTO,
+
+---***INICIO DE DATOS DE LA EDAD DEL PACIENTE
+	cast (((DATEDIFF(day,sigh.dbo.pacientes.FechaNacimiento,sigh.dbo.atenciones.FechaIngreso)%365.25)%30.4375) as int) AS I_CITA_DIA_EDAD,
+	cast(((DATEDIFF(day,sigh.dbo.pacientes.FechaNacimiento,sigh.dbo.atenciones.FechaIngreso)%365.25)/30.4375) as int) I_CITA_MES_EDAD,
+	cast((DATEDIFF(day,sigh.dbo.pacientes.FechaNacimiento,sigh.dbo.atenciones.FechaIngreso)/365.25) as int ) AS I_CITA_ANNIO_EDAD,
+	sigh.dbo.Atenciones.Edad AS I_CITA_EDAD_REGISTRO,
+	sigh.dbo.TiposEdad.Codigo AS V_CITA_ID_TIPO_EDAD_REGISTRO,
+
+---***INICIO DE DATOS OTROS DATOS DE ATENCION
+	sigh.dbo.Turnos.HISTURNO AS V_CITA_ID_TURNO,
+	21 AS I_CITA_FGDIG,
+	NULL AS I_CITA_COMPONENTE,
+	sigh.dbo.FuentesFinanciamiento.CodigoHIS AS V_CITA_ID_FINANCIADOR,
+	NULL AS I_CITA_OTRA_CONDICION,
+	NULL AS V_CITA_FECHA_ULTIMA_REGLA,
+	'A' AS V_CITA_ESTADO_REGISTRO,
+
+---***INICIO DE DATOS DEL EXAMEN FISICO
+	--SIGH_EXTERNA.dbo.atencionesCE.TriajePeso AS D_CITA_EXAMENFISICO_PESO,
+	replace(SIGH_EXTERNA.dbo.atencionesCE.TriajePeso,',','.') AS D_CITA_EXAMENFISICO_PESO,
+	SIGH_EXTERNA.dbo.atencionesCE.TriajeTalla AS D_CITA_EXAMENFISICO_TALLA,
+	NULL AS D_CITA_EXAMENFISICO_HEMOGLOBINA,
+	SIGH_EXTERNA.dbo.atencionesCE.TriajePerimAbdominal AS D_CITA_EXAMENFISICO_PER_ABDOMINAL,
+	SIGH_EXTERNA.dbo.atencionesCE.TriajePerimCefalico AS D_CITA_EXAMENFISICO_PER_CEFALICO,
+
+---***INICIO DE DATOS DEL REGISTRA
+	DocEmpleado.CodigoHIS AS V_PEREGISTRA_ID_TIPODOC,
+	sigh.dbo.Empleados.DNI AS V_PEREGISTRA_NRO_DOCUMENTO,
+	sigh.dbo.Empleados.ApellidoPaterno AS V_PEREGISTRA_APEPATERNO,
+	sigh.dbo.Empleados.ApellidoMaterno AS V_PEREGISTRA_APEMATERNO,
+	sigh.dbo.Empleados.Nombres AS V_PEREGISTRA_NOMBRES,
+	SUBSTRING(sigh.dbo.TiposSexo.Descripcion, 1, 1) AS C_PEREGISTRA_SEXO,
+	CONVERT(NVARCHAR(20), sigh.dbo.Empleados.FechaNacimiento, 112) AS V_PEREGISTRA_FECHA_NACIMIENTO,
+	sigh.dbo.TiposEmpleado.TipoEmpleadoHIS AS V_PEREGISTRA_ID_PROFESION,
+	NacionalidadEmpleado.Codigo AS V_PEREGISTRA_ID_PAIS,
+	sigh.dbo.TiposCondicionTrabajo.idHis AS V_PEREGISTRA_CONDICION,
+	'2' AS C_PEREGISTRA_ID_FLAG,
+
+----***INICIO DE DATOS DEL QUE ATIENDE
+	DocEmpleado.CodigoHIS AS V_PEATIENDE_ID_TIPODOC,
+	sigh.dbo.Empleados.DNI AS V_PEATIENDE_NRO_DOCUMENTO,
+	sigh.dbo.Empleados.ApellidoPaterno AS V_PEATIENDE_APEPATERNO,
+	sigh.dbo.Empleados.ApellidoMaterno AS V_PEATIENDE_APEMATERNO,
+	sigh.dbo.Empleados.Nombres AS V_PEATIENDE_NOMBRES,
+	SUBSTRING(sigh.dbo.TiposSexo.Descripcion, 1, 1) AS C_PEATIENDE_SEXO,
+	CONVERT(NVARCHAR(20), sigh.dbo.Empleados.FechaNacimiento, 112) AS V_PEATIENDE_FECHA_NACIMIENTO,
+	sigh.dbo.TiposEmpleado.TipoEmpleadoHIS AS V_PEATIENDE_ID_PROFESION,
+	NacionalidadEmpleado.Codigo AS V_PEATIENDE_ID_PAIS,
+	sigh.dbo.TiposCondicionTrabajo.idHis AS V_PEATIENDE_CONDICION,
+	'2' AS C_PEATIENDE_ID_FLAG,
+
+----***INICIO DE DATOS DEL PACIENTE
+	sigh.dbo.TiposDocIdentidad.CodigoHIS AS V_PACIENTE_ID_TIPODOC,
+	sigh.dbo.Pacientes.NroDocumento AS V_PACIENTE_NRO_DOCUMENTO,
+	sigh.dbo.Pacientes.NroHistoriaClinica AS V_PACIENTE_NRO_HC,
+	sigh.dbo.Pacientes.ApellidoPaterno AS V_PACIENTE_APEPATERNO,
+	sigh.dbo.Pacientes.ApellidoMaterno AS V_PACIENTE_APEMATERNO,
+	CONCAT(sigh.dbo.Pacientes.PrimerNombre,' ', sigh.dbo.Pacientes.SegundoNombre,' ',sigh.dbo.Pacientes.TercerNombre) AS V_PACIENTE_NOMBRES,
+	SUBSTRING(sexPaci.Descripcion, 1, 1) AS C_PACIENTE_SEXO,
+	CONVERT(NVARCHAR(20), sigh.dbo.Pacientes.FechaNacimiento, 112) AS V_PACIENTE_FECHA_NACIMIENTO,
+	sigh.dbo.Paises.Codigo AS V_PACIENTE_ID_PAIS,
+	sigh.dbo.Pacientes.IdEtnia AS C_PACIENTE_ID_ETNIA,
+	000035125 AS I_PACIENTE_CODIGO_ESTABLECIMIENTO,
+	'2' AS C_PACIENTE_ID_FLAG/*,*/
+
+----*** FIN DE DATOS DEL PACIENTE
+	--sigh.dbo.AtencionesDatosAdicionales.IdEstablecimientoOrigen AS I_PACIENTE_CODIGO_ESTABLECIMIENTO,
+	--' ' AS I_ESTADO,
+	--GETDATE() AS D_FECHA_REGISTRO,
+	--SYSDATETIME() AS D_FECHA_PROCESAMIENTO
+FROM sigh.dbo.Atenciones
+	--left JOIN sigh.dbo.TiposOrigenAtencion ON sigh.dbo.Atenciones.IdOrigenAtencion = sigh.dbo.TiposOrigenAtencion.IdOrigenAtencion
+	inner JOIN sigh.dbo.Pacientes ON sigh.dbo.Atenciones.IdPaciente = sigh.dbo.Pacientes.IdPaciente
+	--permite mostrar al paceinte sin su numero de afiliación
+	--LEFT JOIN SIGH_EXTERNA.dbo.SisFiliaciones ON sigh.dbo.Pacientes.NroDocumento COLLATE Modern_Spanish_CI_AS = SIGH_EXTERNA.dbo.SisFiliaciones.DocumentoNumero
+	LEFT JOIN SIGH_EXTERNA.dbo.SisFuaAtencion ON sigh.dbo.Atenciones.IdCuentaAtencion = SIGH_EXTERNA.dbo.SisFuaAtencion.idCuentaAtencion  -- seleccionar el Nro de filiacion del paciente
+	left JOIN sigh.dbo.AtencionesDiagnosticos ON sigh.dbo.Atenciones.IdAtencion = sigh.dbo.AtencionesDiagnosticos.IdAtencion
+	left JOIN sigh.dbo.Diagnosticos ON sigh.dbo.AtencionesDiagnosticos.IdDiagnostico = sigh.dbo.Diagnosticos.IdDiagnostico
+	left JOIN sigh.dbo.SubclasificacionDiagnosticos ON sigh.dbo.AtencionesDiagnosticos.IdSubclasificacionDx = sigh.dbo.SubclasificacionDiagnosticos.IdSubclasificacionDx
+	left JOIN sigh.dbo.Citas ON sigh.dbo.Atenciones.IdAtencion = sigh.dbo.Citas.IdAtencion AND sigh.dbo.Pacientes.IdPaciente = sigh.dbo.Citas.IdPaciente
+	left JOIN sigh.dbo.Servicios ON sigh.dbo.Citas.IdServicio = sigh.dbo.Servicios.IdServicio
+	left JOIN sigh.dbo.TiposEdad ON sigh.dbo.Atenciones.IdTipoEdad = sigh.dbo.TiposEdad.IdTipoEdad
+	left JOIN sigh.dbo.ProgramacionMedica ON sigh.dbo.Citas.IdProgramacion = sigh.dbo.ProgramacionMedica.IdProgramacion AND sigh.dbo.Servicios.IdServicio = sigh.dbo.ProgramacionMedica.IdServicio
+	left JOIN sigh.dbo.Turnos ON sigh.dbo.ProgramacionMedica.IdTurno = sigh.dbo.Turnos.IdTurno
+	left JOIN sigh.dbo.FuentesFinanciamiento ON sigh.dbo.Atenciones.idFuenteFinanciamiento = sigh.dbo.FuentesFinanciamiento.IdFuenteFinanciamiento
+	left JOIN SIGH_EXTERNA.dbo.atencionesCE ON sigh.dbo.Atenciones.IdAtencion = SIGH_EXTERNA.dbo.atencionesCE.idAtencion
+	left JOIN sigh.dbo.Medicos ON sigh.dbo.Citas.IdMedico = sigh.dbo.Medicos.IdMedico AND sigh.dbo.ProgramacionMedica.IdMedico = sigh.dbo.Medicos.IdMedico
+	left JOIN sigh.dbo.Empleados ON sigh.dbo.Medicos.IdEmpleado = sigh.dbo.Empleados.IdEmpleado
+	left join sigh.dbo.TiposCondicionTrabajo on sigh.dbo.Empleados.IdCondicionTrabajo = sigh.dbo.TiposCondicionTrabajo.IdCondicionTrabajo
+	left JOIN sigh.dbo.TiposDocIdentidad ON sigh.dbo.Pacientes.IdDocIdentidad = sigh.dbo.TiposDocIdentidad.IdDocIdentidad  --documento paciente
+	left join sigh.dbo.TiposDocIdentidad DocEmpleado on sigh.dbo.Empleados.idTipoDocumento = DocEmpleado.IdDocIdentidad --Documento Empleados
+	left JOIN sigh.dbo.TiposSexo ON sigh.dbo.Empleados.idTipoSexo = sigh.dbo.TiposSexo.IdTipoSexo --sexo de empleados
+	left JOIN sigh.dbo.TiposSexo sexPaci on sexPaci.IdTipoSexo = sigh.dbo.Pacientes.IdTipoSexo --sexo de pacientes
+	left JOIN sigh.dbo.TiposEmpleado ON sigh.dbo.Empleados.IdTipoEmpleado = sigh.dbo.TiposEmpleado.IdTipoEmpleado --id condicion
+	left JOIN sigh.dbo.Paises NacionalidadEmpleado on sigh.dbo.Empleados.IdPais = NacionalidadEmpleado.IdPais --nacionalidad de empleados
+	--SCCQ 06-05-2021 Cambio69 Inicio
+	--Antes: left JOIN sigh.dbo.Paises ON sigh.dbo.Pacientes.IdPaisDomicilio = sigh.dbo.Paises.IdPais AND sigh.dbo.Pacientes.IdPaisProcedencia = sigh.dbo.Paises.IdPais AND sigh.dbo.Pacientes.IdPaisNacimiento = sigh.dbo.Paises.IdPais
+	left JOIN sigh.dbo.Paises ON sigh.dbo.Pacientes.IdPaisNacimiento = sigh.dbo.Paises.IdPais
+	--SCCQ 06-05-2021 Cambio69 Fin
+	left JOIN sigh.dbo.AtencionesDatosAdicionales ON sigh.dbo.Atenciones.IdAtencion = sigh.dbo.AtencionesDatosAdicionales.idAtencion
+WHERE sigh.dbo.Atenciones.ENVIADO_HISWEB = 0 and sigh.dbo.Citas.IdEstadoCita =2 and atenciones.FechaIngreso <=  cast(dateadd(day,-3,getdate()) as date)
+
+DECLARE @codAtencion AS nvarchar(20)
+DECLARE @Diagnostico AS nvarchar(10)
+DECLARE @iddiag as int
+DECLARE @LAB AS VARCHAR(10)
+DECLARE AtencionesTrama CURSOR FOR  SELECT V_CITA_ORIGEN,V_CITA_ITEMS_CODIGO FROM BDHIS_MINSA.dbo.TRAMA_INTEGRACION where I_ESTADO = 0
+OPEN AtencionesTrama
+FETCH NEXT FROM AtencionesTrama INTO @codAtencion,@Diagnostico
+	WHILE @@fetch_status = 0
+	BEGIN
+		--PRINT @codAtencion+' '+@Diagnostico
+		--FETCH NEXT FROM AtencionesTrama INTO @codAtencion,@Diagnostico
+		--SELECCIONANDO EL ID DEL DIAGNOSTICO
+		set @iddiag = (select IdDiagnostico from sigh.dbo.Diagnosticos where codigoCIEsinPto = @Diagnostico)
+
+		--LLENANDO EL PRIMER LAB
+		SET @LAB =
+		(SELECT	labConfHIS
+		FROM	sigh.dbo.AtencionesDiagnosticos
+		where  IdAtencion=@codAtencion and IdDiagnostico = @iddiag--(select IdDiagnostico from sigh.dbo.Diagnosticos where codigoCIEsinPto = 'S411 ')
+		ORDER BY   IdAtencion
+		OFFSET 0 ROWS   -- Skip this number of rows
+		FETCH NEXT 1 ROW ONLY ) -- Return this number of rows
+
+		UPDATE TRAMA_INTEGRACION SET V_CITA_ITEMS_VALOR_LAB_1 = @LAB WHERE  V_CITA_ORIGEN = @codAtencion AND V_CITA_ITEMS_CODIGO = @Diagnostico
+
+		--LLENANDO EL SEGUNDO LAB
+		SET @LAB =
+		(SELECT	labConfHIS
+		FROM	sigh.dbo.AtencionesDiagnosticos
+		where  IdAtencion=@codAtencion and IdDiagnostico = @iddiag--(select IdDiagnostico from sigh.dbo.Diagnosticos where codigoCIEsinPto = 'S411 ')
+		ORDER BY   IdAtencion
+		OFFSET 1 ROWS   -- Skip this number of rows
+		FETCH NEXT 1 ROW ONLY ) -- Return this number of rows
+
+		UPDATE TRAMA_INTEGRACION SET V_CITA_ITEMS_VALOR_LAB_2 = @LAB WHERE  V_CITA_ORIGEN = @codAtencion AND V_CITA_ITEMS_CODIGO = @Diagnostico
+
+		--LLENANDO EL TERCER LAB
+		SET @LAB =
+		(SELECT	labConfHIS
+		FROM	sigh.dbo.AtencionesDiagnosticos
+		where  IdAtencion=@codAtencion and IdDiagnostico = @iddiag--(select IdDiagnostico from sigh.dbo.Diagnosticos where codigoCIEsinPto = 'S411 ')
+		ORDER BY   IdAtencion
+		OFFSET 2 ROWS   -- Skip this number of rows
+		FETCH NEXT 1 ROW ONLY ) -- Return this number of rows
+
+		UPDATE TRAMA_INTEGRACION SET V_CITA_ITEMS_VALOR_LAB_3 = @LAB WHERE  V_CITA_ORIGEN = @codAtencion AND V_CITA_ITEMS_CODIGO = @Diagnostico
+
+		FETCH NEXT FROM AtencionesTrama INTO @codAtencion,@Diagnostico
+END
+CLOSE AtencionesTrama
+DEALLOCATE AtencionesTrama
+
+-- ACTUALIZA EL ESATADO DE LOS CAMPOS ENVIADOS AL PROCESADOR
+-- lo realiza seleccionando los campos con el mismo id atencion en cita y atenciones
+--  y solo los que tengan estado de envio 0 y estado de cita atendido (2)
+UPDATE	sigh.dbo.Atenciones
+SET		sigh.dbo.Atenciones.ENVIADO_HISWEB = 1
+FROM	sigh.dbo.Atenciones
+INNER JOIN sigh.dbo.citas ON sigh.dbo.Atenciones.IdAtencion = sigh.dbo.citas.IdAtencion
+INNER JOIN TRAMA_INTEGRACION on V_CITA_ORIGEN = sigh.dbo.Atenciones.IdAtencion
+WHERE	sigh.dbo.Atenciones.ENVIADO_HISWEB = 0 and sigh.dbo.Citas.IdEstadoCita =2
+
+if (SELECT count(*) FROM sigh.dbo.FactCatalogoServiciosN CSN
+INNER JOIN TRAMA_INTEGRACION ti on csn.IdAtencion = ti.V_CITA_ORIGEN
+and ti.V_CITA_ITEMS_CODIGO = CSN.IdProducto where I_ESTADO = 0) =0
+begin
+		print 'entro FactCatalogoServiciosN'
+		INSERT INTO
+			BDHIS_MINSA.dbo.TRAMA_INTEGRACION
+			(
+			V_CITA_ITEMS_CODIGO,V_CITA_ITEMS_TIPO_DIAGNOSTICO,V_CITA_ITEMS_VALOR_LAB_1,
+			V_CITA_ORIGEN, V_CITA_NUMERO_AFILIACION, V_CITA_FECHA_ATENCION,/*C_CITA_ITEMS_VALOR_LAB_1, C_CITA_ITEMS_VALOR_LAB_2, C_CITA_ITEMS_VALOR_LAB_3,*/
+			V_CITA_ID_UPS, I_CITA_CODIGO_ESTABLECIMIENTO,
+			I_CITA_DIA_EDAD, I_CITA_MES_EDAD, I_CITA_ANNIO_EDAD, I_CITA_EDAD_REGISTRO, V_CITA_ID_TIPO_EDAD_REGISTRO,
+			V_CITA_ID_TURNO, I_CITA_FGDIG, I_CITA_COMPONENTE,V_CITA_ID_FINANCIADOR, I_CITA_OTRA_CONDICION,V_CITA_FECHA_ULTIMA_REGLA, V_CITA_ESTADO_REGISTRO,
+			D_CITA_EXAMENFISICO_PESO, D_CITA_EXAMENFISICO_TALLA,D_CITA_EXAMENFISICO_HEMOGLOBINA, D_CITA_EXAMENFISICO_PER_ABDOMINAL, D_CITA_EXAMENFISICO_PER_CEFALICO,
+			I_PEREGISTRA_ID_TIPODOC, V_PEREGISTRA_NRO_DOCUMENTO,V_PEREGISTRA_APEPATERNO, V_PEREGISTRA_APEMATERNO, V_PEREGISTRA_NOMBRES, V_PEREGISTRA_SEXO, V_PEREGISTRA_FECHA_NACIMIENTO, V_PEREGISTRA_ID_PROFESION,V_PEREGISTRA_ID_PAIS, V_PEREGISTRA_CONDICION, V_PEREGISTRA_ID_FLAG,
+			I_PEATIENDE_ID_TIPODOC, V_PEATIENDE_NRO_DOCUMENTO, V_PEATIENDE_APEPATERNO,V_PEATIENDE_APEMATERNO, V_PEATIENDE_NOMBRES, V_PEATIENDE_SEXO, V_PEATIENDE_FECHA_NACIMIENTO, V_PEATIENDE_ID_PROFESION, V_PEATIENDE_ID_PAIS,V_PEATIENDE_CONDICION, V_PEATIENDE_ID_FLAG,
+			I_PACIENTE_ID_TIPODOC,V_PACIENTE_NRO_DOCUMENTO, V_PACIENTE_NRO_HC, V_PACIENTE_APEPATERNO, V_PACIENTE_APEMATERNO,V_PACIENTE_NOMBRES, V_PACIENTE_SEXO, V_PACIENTE_FECHA_NACIMIENTO, V_PACIENTE_ID_PAIS, V_PACIENTE_ID_ETNIA, I_PACIENTE_CODIGO_ESTABLECIMIENTO, V_PACIENTE_ID_FLAG
+			)
+		SELECT
+			--FacturacionServicioDespacho.IdProducto,FacturacionServicioDespacho.labConfHIS,
+			distinct(FactCatalogoServiciosN.IdProducto),'D'/**FactCatalogoServiciosN.IdSubclasificacionDx**/,ltrim(rtrim(FactCatalogoServiciosN.valores)),
+			V_CITA_ORIGEN, V_CITA_NUMERO_AFILIACION, V_CITA_FECHA_ATENCION,--v_CITA_ITEMS_VALOR_LAB_2, V_CITA_ITEMS_VALOR_LAB_3,
+			V_CITA_ID_UPS, I_CITA_CODIGO_ESTABLECIMIENTO,
+			I_CITA_DIA_EDAD, I_CITA_MES_EDAD, I_CITA_ANNIO_EDAD, I_CITA_EDAD_REGISTRO, V_CITA_ID_TIPO_EDAD_REGISTRO,
+			V_CITA_ID_TURNO, I_CITA_FGDIG, I_CITA_COMPONENTE,V_CITA_ID_FINANCIADOR, I_CITA_OTRA_CONDICION,V_CITA_FECHA_ULTIMA_REGLA, V_CITA_ESTADO_REGISTRO,
+			D_CITA_EXAMENFISICO_PESO, D_CITA_EXAMENFISICO_TALLA,D_CITA_EXAMENFISICO_HEMOGLOBINA, D_CITA_EXAMENFISICO_PER_ABDOMINAL, D_CITA_EXAMENFISICO_PER_CEFALICO,
+			I_PEREGISTRA_ID_TIPODOC, V_PEREGISTRA_NRO_DOCUMENTO,V_PEREGISTRA_APEPATERNO, V_PEREGISTRA_APEMATERNO, V_PEREGISTRA_NOMBRES, V_PEREGISTRA_SEXO, V_PEREGISTRA_FECHA_NACIMIENTO, V_PEREGISTRA_ID_PROFESION,V_PEREGISTRA_ID_PAIS, V_PEREGISTRA_CONDICION, V_PEREGISTRA_ID_FLAG,
+			I_PEATIENDE_ID_TIPODOC, V_PEATIENDE_NRO_DOCUMENTO, V_PEATIENDE_APEPATERNO,V_PEATIENDE_APEMATERNO, V_PEATIENDE_NOMBRES, V_PEATIENDE_SEXO, V_PEATIENDE_FECHA_NACIMIENTO, V_PEATIENDE_ID_PROFESION, V_PEATIENDE_ID_PAIS,V_PEATIENDE_CONDICION, V_PEATIENDE_ID_FLAG,
+			I_PACIENTE_ID_TIPODOC,V_PACIENTE_NRO_DOCUMENTO, V_PACIENTE_NRO_HC, V_PACIENTE_APEPATERNO, V_PACIENTE_APEMATERNO,V_PACIENTE_NOMBRES, V_PACIENTE_SEXO, V_PACIENTE_FECHA_NACIMIENTO, V_PACIENTE_ID_PAIS, V_PACIENTE_ID_ETNIA, I_PACIENTE_CODIGO_ESTABLECIMIENTO, V_PACIENTE_ID_FLAG
+		FROM TRAMA_INTEGRACION
+		inner join sigh.dbo.FactCatalogoServiciosN on FactCatalogoServiciosN.IdAtencion = TRAMA_INTEGRACION.V_CITA_ORIGEN
+		where TRAMA_INTEGRACION.I_ESTADO=0
+end
+---INTEGRACION CON CPTS LABO Y DIAG.IMG
+
+---==> SOL0025:
+---==> se agrega el procedimiento para exportar de la nueva tabla generada en el SOL0031 AtencionCEServicios
+---==> se agrega un if previo en el que se verifica si la tabla existe, si no existe ignora este proceso
+if OBJECT_ID('sigh.dbo.AtencionCEServicios') is not null
+begin
+	if (SELECT count(*) FROM sigh.dbo.AtencionCEServicios ACS
+	INNER JOIN TRAMA_INTEGRACION ti1 on ACS .IdAtencion = ti1.V_CITA_ORIGEN
+	and ti1.V_CITA_ITEMS_CODIGO = ACS.Codigo_Item and I_ESTADO = 0 and  acs.idanterior is null) =0
+	begin
+		print 'entro AtencionCEServicios'
+		INSERT INTO
+			BDHIS_MINSA.dbo.TRAMA_INTEGRACION
+			(
+			--V_CITA_ITEMS_CODIGO,V_CITA_ITEMS_TIPO_DIAGNOSTICO,V_CITA_ITEMS_VALOR_LAB_1,
+			V_CITA_ITEMS_CODIGO,V_CITA_ITEMS_TIPO_DIAGNOSTICO,V_CITA_ITEMS_VALOR_LAB_1,V_CITA_ITEMS_VALOR_LAB_2,V_CITA_ITEMS_VALOR_LAB_3,
+			V_CITA_ORIGEN, V_CITA_NUMERO_AFILIACION, V_CITA_FECHA_ATENCION,/*C_CITA_ITEMS_VALOR_LAB_1, C_CITA_ITEMS_VALOR_LAB_2, C_CITA_ITEMS_VALOR_LAB_3,*/
+			V_CITA_ID_UPS, I_CITA_CODIGO_ESTABLECIMIENTO,
+			I_CITA_DIA_EDAD, I_CITA_MES_EDAD, I_CITA_ANNIO_EDAD, I_CITA_EDAD_REGISTRO, V_CITA_ID_TIPO_EDAD_REGISTRO,
+			V_CITA_ID_TURNO, I_CITA_FGDIG, I_CITA_COMPONENTE,V_CITA_ID_FINANCIADOR, I_CITA_OTRA_CONDICION,V_CITA_FECHA_ULTIMA_REGLA, V_CITA_ESTADO_REGISTRO,
+			D_CITA_EXAMENFISICO_PESO, D_CITA_EXAMENFISICO_TALLA,D_CITA_EXAMENFISICO_HEMOGLOBINA, D_CITA_EXAMENFISICO_PER_ABDOMINAL, D_CITA_EXAMENFISICO_PER_CEFALICO,
+			I_PEREGISTRA_ID_TIPODOC, V_PEREGISTRA_NRO_DOCUMENTO,V_PEREGISTRA_APEPATERNO, V_PEREGISTRA_APEMATERNO, V_PEREGISTRA_NOMBRES, V_PEREGISTRA_SEXO, V_PEREGISTRA_FECHA_NACIMIENTO, V_PEREGISTRA_ID_PROFESION,V_PEREGISTRA_ID_PAIS, V_PEREGISTRA_CONDICION, V_PEREGISTRA_ID_FLAG,
+			I_PEATIENDE_ID_TIPODOC, V_PEATIENDE_NRO_DOCUMENTO, V_PEATIENDE_APEPATERNO,V_PEATIENDE_APEMATERNO, V_PEATIENDE_NOMBRES, V_PEATIENDE_SEXO, V_PEATIENDE_FECHA_NACIMIENTO, V_PEATIENDE_ID_PROFESION, V_PEATIENDE_ID_PAIS,V_PEATIENDE_CONDICION, V_PEATIENDE_ID_FLAG,
+			I_PACIENTE_ID_TIPODOC,V_PACIENTE_NRO_DOCUMENTO, V_PACIENTE_NRO_HC, V_PACIENTE_APEPATERNO, V_PACIENTE_APEMATERNO,V_PACIENTE_NOMBRES, V_PACIENTE_SEXO, V_PACIENTE_FECHA_NACIMIENTO, V_PACIENTE_ID_PAIS, V_PACIENTE_ID_ETNIA, I_PACIENTE_CODIGO_ESTABLECIMIENTO, V_PACIENTE_ID_FLAG
+			)
+		SELECT
+			--FacturacionServicioDespacho.IdProducto,FacturacionServicioDespacho.labConfHIS,
+			--distinct(FactCatalogoServiciosN.IdProducto),'D'/**FactCatalogoServiciosN.IdSubclasificacionDx**/,ltrim(rtrim(FactCatalogoServiciosN.valores)),
+			distinct(AtencionCEServicios.Codigo_Item),'D'/**FactCatalogoServiciosN.IdSubclasificacionDx**/,ltrim(rtrim(AtencionCEServicios.Lab1)),ltrim(rtrim(AtencionCEServicios.Lab2)),ltrim(rtrim(AtencionCEServicios.Lab3)),
+			V_CITA_ORIGEN, V_CITA_NUMERO_AFILIACION, V_CITA_FECHA_ATENCION,--v_CITA_ITEMS_VALOR_LAB_2, V_CITA_ITEMS_VALOR_LAB_3,
+			V_CITA_ID_UPS, I_CITA_CODIGO_ESTABLECIMIENTO,
+			I_CITA_DIA_EDAD, I_CITA_MES_EDAD, I_CITA_ANNIO_EDAD, I_CITA_EDAD_REGISTRO, V_CITA_ID_TIPO_EDAD_REGISTRO,
+			V_CITA_ID_TURNO, I_CITA_FGDIG, I_CITA_COMPONENTE,V_CITA_ID_FINANCIADOR, I_CITA_OTRA_CONDICION,V_CITA_FECHA_ULTIMA_REGLA, V_CITA_ESTADO_REGISTRO,
+			D_CITA_EXAMENFISICO_PESO, D_CITA_EXAMENFISICO_TALLA,D_CITA_EXAMENFISICO_HEMOGLOBINA, D_CITA_EXAMENFISICO_PER_ABDOMINAL, D_CITA_EXAMENFISICO_PER_CEFALICO,
+			I_PEREGISTRA_ID_TIPODOC, V_PEREGISTRA_NRO_DOCUMENTO,V_PEREGISTRA_APEPATERNO, V_PEREGISTRA_APEMATERNO, V_PEREGISTRA_NOMBRES, V_PEREGISTRA_SEXO, V_PEREGISTRA_FECHA_NACIMIENTO, V_PEREGISTRA_ID_PROFESION,V_PEREGISTRA_ID_PAIS, V_PEREGISTRA_CONDICION, V_PEREGISTRA_ID_FLAG,
+			I_PEATIENDE_ID_TIPODOC, V_PEATIENDE_NRO_DOCUMENTO, V_PEATIENDE_APEPATERNO,V_PEATIENDE_APEMATERNO, V_PEATIENDE_NOMBRES, V_PEATIENDE_SEXO, V_PEATIENDE_FECHA_NACIMIENTO, V_PEATIENDE_ID_PROFESION, V_PEATIENDE_ID_PAIS,V_PEATIENDE_CONDICION, V_PEATIENDE_ID_FLAG,
+			I_PACIENTE_ID_TIPODOC,V_PACIENTE_NRO_DOCUMENTO, V_PACIENTE_NRO_HC, V_PACIENTE_APEPATERNO, V_PACIENTE_APEMATERNO,V_PACIENTE_NOMBRES, V_PACIENTE_SEXO, V_PACIENTE_FECHA_NACIMIENTO, V_PACIENTE_ID_PAIS, V_PACIENTE_ID_ETNIA, I_PACIENTE_CODIGO_ESTABLECIMIENTO, V_PACIENTE_ID_FLAG
+		FROM TRAMA_INTEGRACION
+		inner join sigh.dbo.AtencionCEServicios on AtencionCEServicios.IdAtencion = TRAMA_INTEGRACION.V_CITA_ORIGEN
+		where
+		sigh.dbo.AtencionCEServicios.Estado =1
+		and TRAMA_INTEGRACION.I_ESTADO=0
+		and AtencionCEServicios.idanterior is null
+	end
+end
+GO
+/****** Object:  StoredProcedure [dbo].[EXPORT_GALENHOS_HISMINSA_DX_CPT_LAB_DIMG]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[EXPORT_GALENHOS_HISMINSA_DX_CPT_LAB_DIMG]
+WITH EXECUTE AS CALLER
+AS
+/**
+	INSERTA EN TRAMA_INTEGRACION LOS REGISTROS GENERADOS EN LA ATENCION DE LA BD SIGH
+*/
+INSERT INTO
+	BDHIS_MINSA.dbo.TRAMA_INTEGRACION
+	(
+	V_CITA_ITEMS_CODIGO,
+	V_CITA_ORIGEN, V_CITA_NUMERO_AFILIACION, V_CITA_FECHA_ATENCION,V_CITA_ITEMS_TIPO_DIAGNOSTICO,/*C_CITA_ITEMS_VALOR_LAB_1, C_CITA_ITEMS_VALOR_LAB_2, C_CITA_ITEMS_VALOR_LAB_3,*/
+	V_CITA_ID_UPS, I_CITA_CODIGO_ESTABLECIMIENTO,
+	I_CITA_DIA_EDAD, I_CITA_MES_EDAD, I_CITA_ANNIO_EDAD, I_CITA_EDAD_REGISTRO, V_CITA_ID_TIPO_EDAD_REGISTRO,
+	V_CITA_ID_TURNO, I_CITA_FGDIG, I_CITA_COMPONENTE,V_CITA_ID_FINANCIADOR, I_CITA_OTRA_CONDICION,V_CITA_FECHA_ULTIMA_REGLA, V_CITA_ESTADO_REGISTRO,
+	D_CITA_EXAMENFISICO_PESO, D_CITA_EXAMENFISICO_TALLA,D_CITA_EXAMENFISICO_HEMOGLOBINA, D_CITA_EXAMENFISICO_PER_ABDOMINAL, D_CITA_EXAMENFISICO_PER_CEFALICO,
+	I_PEREGISTRA_ID_TIPODOC, V_PEREGISTRA_NRO_DOCUMENTO,V_PEREGISTRA_APEPATERNO, V_PEREGISTRA_APEMATERNO, V_PEREGISTRA_NOMBRES, V_PEREGISTRA_SEXO, V_PEREGISTRA_FECHA_NACIMIENTO, V_PEREGISTRA_ID_PROFESION,V_PEREGISTRA_ID_PAIS, V_PEREGISTRA_CONDICION, V_PEREGISTRA_ID_FLAG,
+	I_PEATIENDE_ID_TIPODOC, V_PEATIENDE_NRO_DOCUMENTO, V_PEATIENDE_APEPATERNO,V_PEATIENDE_APEMATERNO, V_PEATIENDE_NOMBRES, V_PEATIENDE_SEXO, V_PEATIENDE_FECHA_NACIMIENTO, V_PEATIENDE_ID_PROFESION, V_PEATIENDE_ID_PAIS,V_PEATIENDE_CONDICION, V_PEATIENDE_ID_FLAG,
+	I_PACIENTE_ID_TIPODOC,V_PACIENTE_NRO_DOCUMENTO, V_PACIENTE_NRO_HC, V_PACIENTE_APEPATERNO, V_PACIENTE_APEMATERNO,V_PACIENTE_NOMBRES, V_PACIENTE_SEXO, V_PACIENTE_FECHA_NACIMIENTO, V_PACIENTE_ID_PAIS, V_PACIENTE_ID_ETNIA, I_PACIENTE_CODIGO_ESTABLECIMIENTO, V_PACIENTE_ID_FLAG
+	)
+SELECT
+	distinct codigoCIEsinPto AS V_CITA_ITEMS_CODIGO,
+
+---***INICIO DE DATOS DE LA ATENCION
+	sigh.dbo.Atenciones.IdAtencion AS V_CITA_ORIGEN,
+	--SIGH_EXTERNA.dbo.SisFiliaciones.AfiliacionNroFormato AS V_CITA_NUMERO_AFILIACION,
+	SIGH_EXTERNA.dbo.SisFuaAtencion.AfiliacionNroFormato AS V_CITA_NUMERO_AFILIACION,
+	CONVERT(NVARCHAR(20), sigh.dbo.Atenciones.FechaIngreso, 112) AS V_CITA_FECHA_ATENCION,
+	sigh.dbo.SubclasificacionDiagnosticos.Codigo AS C_CITA_ITEMS_TIPO_DIAGNOSTICO,
+
+--	sigh.dbo.AtencionesDiagnosticos.labConfHIS AS C_CITA_ITEMS_VALOR_LAB_1,
+--	NULL AS C_CITA_ITEMS_VALOR_LAB_2,
+--	NULL AS C_CITA_ITEMS_VALOR_LAB_3,
+---***INICIO DE DATOS DEL ESTABLECMIENTO
+	sigh.dbo.Servicios.codigoServicioHIS AS V_CITA_ID_UPS,
+	000003543 AS I_CITA_CODIGO_ESTABLECIMIENTO,
+
+---***INICIO DE DATOS DE LA EDAD DEL PACIENTE
+	cast (((DATEDIFF(day,sigh.dbo.pacientes.FechaNacimiento,sigh.dbo.atenciones.FechaIngreso)%365.25)%30.4375) as int) AS I_CITA_DIA_EDAD,
+	cast(((DATEDIFF(day,sigh.dbo.pacientes.FechaNacimiento,sigh.dbo.atenciones.FechaIngreso)%365.25)/30.4375) as int) I_CITA_MES_EDAD,
+	cast((DATEDIFF(day,sigh.dbo.pacientes.FechaNacimiento,sigh.dbo.atenciones.FechaIngreso)/365.25) as int ) AS I_CITA_ANNIO_EDAD,
+	sigh.dbo.Atenciones.Edad AS I_CITA_EDAD_REGISTRO,
+	sigh.dbo.TiposEdad.Codigo AS V_CITA_ID_TIPO_EDAD_REGISTRO,
+
+---***INICIO DE DATOS OTROS DATOS DE ATENCION
+	sigh.dbo.Turnos.HISTURNO AS V_CITA_ID_TURNO,
+	21 AS I_CITA_FGDIG,
+	NULL AS I_CITA_COMPONENTE,
+	sigh.dbo.FuentesFinanciamiento.CodigoHIS AS V_CITA_ID_FINANCIADOR,
+	NULL AS I_CITA_OTRA_CONDICION,
+	NULL AS V_CITA_FECHA_ULTIMA_REGLA,
+	'A' AS V_CITA_ESTADO_REGISTRO,
+
+---***INICIO DE DATOS DEL EXAMEN FISICO
+	--SIGH_EXTERNA.dbo.atencionesCE.TriajePeso AS D_CITA_EXAMENFISICO_PESO,
+	replace(SIGH_EXTERNA.dbo.atencionesCE.TriajePeso,',','.') AS D_CITA_EXAMENFISICO_PESO,
+	SIGH_EXTERNA.dbo.atencionesCE.TriajeTalla AS D_CITA_EXAMENFISICO_TALLA,
+	NULL AS D_CITA_EXAMENFISICO_HEMOGLOBINA,
+	SIGH_EXTERNA.dbo.atencionesCE.TriajePerimAbdominal AS D_CITA_EXAMENFISICO_PER_ABDOMINAL,
+	SIGH_EXTERNA.dbo.atencionesCE.TriajePerimCefalico AS D_CITA_EXAMENFISICO_PER_CEFALICO,
+
+---***INICIO DE DATOS DEL REGISTRA
+	DocEmpleado.CodigoHIS AS V_PEREGISTRA_ID_TIPODOC,
+	sigh.dbo.Empleados.DNI AS V_PEREGISTRA_NRO_DOCUMENTO,
+	sigh.dbo.Empleados.ApellidoPaterno AS V_PEREGISTRA_APEPATERNO,
+	sigh.dbo.Empleados.ApellidoMaterno AS V_PEREGISTRA_APEMATERNO,
+	sigh.dbo.Empleados.Nombres AS V_PEREGISTRA_NOMBRES,
+	SUBSTRING(sigh.dbo.TiposSexo.Descripcion, 1, 1) AS C_PEREGISTRA_SEXO,
+	CONVERT(NVARCHAR(20), sigh.dbo.Empleados.FechaNacimiento, 112) AS V_PEREGISTRA_FECHA_NACIMIENTO,
+	sigh.dbo.TiposEmpleado.TipoEmpleadoHIS AS V_PEREGISTRA_ID_PROFESION,
+	NacionalidadEmpleado.Codigo AS V_PEREGISTRA_ID_PAIS,
+	sigh.dbo.TiposCondicionTrabajo.idHis AS V_PEREGISTRA_CONDICION,
+	'2' AS C_PEREGISTRA_ID_FLAG,
+
+----***INICIO DE DATOS DEL QUE ATIENDE
+	DocEmpleado.CodigoHIS AS V_PEATIENDE_ID_TIPODOC,
+	sigh.dbo.Empleados.DNI AS V_PEATIENDE_NRO_DOCUMENTO,
+	sigh.dbo.Empleados.ApellidoPaterno AS V_PEATIENDE_APEPATERNO,
+	sigh.dbo.Empleados.ApellidoMaterno AS V_PEATIENDE_APEMATERNO,
+	sigh.dbo.Empleados.Nombres AS V_PEATIENDE_NOMBRES,
+	SUBSTRING(sigh.dbo.TiposSexo.Descripcion, 1, 1) AS C_PEATIENDE_SEXO,
+	CONVERT(NVARCHAR(20), sigh.dbo.Empleados.FechaNacimiento, 112) AS V_PEATIENDE_FECHA_NACIMIENTO,
+	sigh.dbo.TiposEmpleado.TipoEmpleadoHIS AS V_PEATIENDE_ID_PROFESION,
+	NacionalidadEmpleado.Codigo AS V_PEATIENDE_ID_PAIS,
+	sigh.dbo.TiposCondicionTrabajo.idHis AS V_PEATIENDE_CONDICION,
+	'2' AS C_PEATIENDE_ID_FLAG,
+
+----***INICIO DE DATOS DEL PACIENTE
+	sigh.dbo.TiposDocIdentidad.CodigoHIS AS V_PACIENTE_ID_TIPODOC,
+	sigh.dbo.Pacientes.NroDocumento AS V_PACIENTE_NRO_DOCUMENTO,
+	sigh.dbo.Pacientes.NroHistoriaClinica AS V_PACIENTE_NRO_HC,
+	sigh.dbo.Pacientes.ApellidoPaterno AS V_PACIENTE_APEPATERNO,
+	sigh.dbo.Pacientes.ApellidoMaterno AS V_PACIENTE_APEMATERNO,
+	CONCAT(sigh.dbo.Pacientes.PrimerNombre,' ', sigh.dbo.Pacientes.SegundoNombre,' ',sigh.dbo.Pacientes.TercerNombre) AS V_PACIENTE_NOMBRES,
+	SUBSTRING(sexPaci.Descripcion, 1, 1) AS C_PACIENTE_SEXO,
+	CONVERT(NVARCHAR(20), sigh.dbo.Pacientes.FechaNacimiento, 112) AS V_PACIENTE_FECHA_NACIMIENTO,
+	sigh.dbo.Paises.Codigo AS V_PACIENTE_ID_PAIS,
+	sigh.dbo.Pacientes.IdEtnia AS C_PACIENTE_ID_ETNIA,
+	000003543 AS I_PACIENTE_CODIGO_ESTABLECIMIENTO,
+	'2' AS C_PACIENTE_ID_FLAG/*,*/
+
+----*** FIN DE DATOS DEL PACIENTE
+	--sigh.dbo.AtencionesDatosAdicionales.IdEstablecimientoOrigen AS I_PACIENTE_CODIGO_ESTABLECIMIENTO,
+	--' ' AS I_ESTADO,
+	--GETDATE() AS D_FECHA_REGISTRO,
+	--SYSDATETIME() AS D_FECHA_PROCESAMIENTO
+FROM sigh.dbo.Atenciones
+	--left JOIN sigh.dbo.TiposOrigenAtencion ON sigh.dbo.Atenciones.IdOrigenAtencion = sigh.dbo.TiposOrigenAtencion.IdOrigenAtencion
+	inner JOIN sigh.dbo.Pacientes ON sigh.dbo.Atenciones.IdPaciente = sigh.dbo.Pacientes.IdPaciente
+	--permite mostrar al paceinte sin su numero de afiliación
+	--LEFT JOIN SIGH_EXTERNA.dbo.SisFiliaciones ON sigh.dbo.Pacientes.NroDocumento COLLATE Modern_Spanish_CI_AS = SIGH_EXTERNA.dbo.SisFiliaciones.DocumentoNumero
+	LEFT JOIN SIGH_EXTERNA.dbo.SisFuaAtencion ON sigh.dbo.Atenciones.IdCuentaAtencion = SIGH_EXTERNA.dbo.SisFuaAtencion.idCuentaAtencion  -- seleccionar el Nro de filiacion del paciente
+	left JOIN sigh.dbo.AtencionesDiagnosticos ON sigh.dbo.Atenciones.IdAtencion = sigh.dbo.AtencionesDiagnosticos.IdAtencion
+	left JOIN sigh.dbo.Diagnosticos ON sigh.dbo.AtencionesDiagnosticos.IdDiagnostico = sigh.dbo.Diagnosticos.IdDiagnostico
+	left JOIN sigh.dbo.SubclasificacionDiagnosticos ON sigh.dbo.AtencionesDiagnosticos.IdSubclasificacionDx = sigh.dbo.SubclasificacionDiagnosticos.IdSubclasificacionDx
+	left JOIN sigh.dbo.Citas ON sigh.dbo.Atenciones.IdAtencion = sigh.dbo.Citas.IdAtencion AND sigh.dbo.Pacientes.IdPaciente = sigh.dbo.Citas.IdPaciente
+	left JOIN sigh.dbo.Servicios ON sigh.dbo.Citas.IdServicio = sigh.dbo.Servicios.IdServicio
+	left JOIN sigh.dbo.TiposEdad ON sigh.dbo.Atenciones.IdTipoEdad = sigh.dbo.TiposEdad.IdTipoEdad
+	left JOIN sigh.dbo.ProgramacionMedica ON sigh.dbo.Citas.IdProgramacion = sigh.dbo.ProgramacionMedica.IdProgramacion AND sigh.dbo.Servicios.IdServicio = sigh.dbo.ProgramacionMedica.IdServicio
+	left JOIN sigh.dbo.Turnos ON sigh.dbo.ProgramacionMedica.IdTurno = sigh.dbo.Turnos.IdTurno
+	left JOIN sigh.dbo.FuentesFinanciamiento ON sigh.dbo.Atenciones.idFuenteFinanciamiento = sigh.dbo.FuentesFinanciamiento.IdFuenteFinanciamiento
+	left JOIN SIGH_EXTERNA.dbo.atencionesCE ON sigh.dbo.Atenciones.IdAtencion = SIGH_EXTERNA.dbo.atencionesCE.idAtencion
+	left JOIN sigh.dbo.Medicos ON sigh.dbo.Citas.IdMedico = sigh.dbo.Medicos.IdMedico AND sigh.dbo.ProgramacionMedica.IdMedico = sigh.dbo.Medicos.IdMedico
+	left JOIN sigh.dbo.Empleados ON sigh.dbo.Medicos.IdEmpleado = sigh.dbo.Empleados.IdEmpleado
+	left join sigh.dbo.TiposCondicionTrabajo on sigh.dbo.Empleados.IdCondicionTrabajo = sigh.dbo.TiposCondicionTrabajo.IdCondicionTrabajo
+	left JOIN sigh.dbo.TiposDocIdentidad ON sigh.dbo.Pacientes.IdDocIdentidad = sigh.dbo.TiposDocIdentidad.IdDocIdentidad  --documento paciente
+	left join sigh.dbo.TiposDocIdentidad DocEmpleado on sigh.dbo.Empleados.idTipoDocumento = DocEmpleado.IdDocIdentidad --Documento Empleados
+	left JOIN sigh.dbo.TiposSexo ON sigh.dbo.Empleados.idTipoSexo = sigh.dbo.TiposSexo.IdTipoSexo --sexo de empleados
+	left JOIN sigh.dbo.TiposSexo sexPaci on sexPaci.IdTipoSexo = sigh.dbo.Pacientes.IdTipoSexo --sexo de pacientes
+	left JOIN sigh.dbo.TiposEmpleado ON sigh.dbo.Empleados.IdTipoEmpleado = sigh.dbo.TiposEmpleado.IdTipoEmpleado --id condicion
+	left JOIN sigh.dbo.Paises NacionalidadEmpleado on sigh.dbo.Empleados.IdPais = NacionalidadEmpleado.IdPais --nacionalidad de empleados
+	left JOIN sigh.dbo.Paises ON sigh.dbo.Pacientes.IdPaisDomicilio = sigh.dbo.Paises.IdPais AND sigh.dbo.Pacientes.IdPaisProcedencia = sigh.dbo.Paises.IdPais AND sigh.dbo.Pacientes.IdPaisNacimiento = sigh.dbo.Paises.IdPais
+	left JOIN sigh.dbo.AtencionesDatosAdicionales ON sigh.dbo.Atenciones.IdAtencion = sigh.dbo.AtencionesDatosAdicionales.idAtencion
+WHERE sigh.dbo.Atenciones.ENVIADO_HISWEB = 0 and sigh.dbo.Citas.IdEstadoCita =2 and atenciones.FechaIngreso <=  cast(dateadd(day,-1,getdate()) as date)
+
+DECLARE @codAtencion AS nvarchar(20)
+DECLARE @Diagnostico AS nvarchar(10)
+DECLARE @iddiag as int
+DECLARE @LAB AS VARCHAR(10)
+DECLARE AtencionesTrama CURSOR FOR  SELECT V_CITA_ORIGEN,V_CITA_ITEMS_CODIGO FROM BDHIS_MINSA.dbo.TRAMA_INTEGRACION where I_ESTADO = 0
+OPEN AtencionesTrama
+FETCH NEXT FROM AtencionesTrama INTO @codAtencion,@Diagnostico
+	WHILE @@fetch_status = 0
+	BEGIN
+		--PRINT @codAtencion+' '+@Diagnostico
+		--FETCH NEXT FROM AtencionesTrama INTO @codAtencion,@Diagnostico
+		--SELECCIONANDO EL ID DEL DIAGNOSTICO
+		set @iddiag = (select IdDiagnostico from sigh.dbo.Diagnosticos where codigoCIEsinPto = @Diagnostico)
+
+		--LLENANDO EL PRIMER LAB
+		SET @LAB =
+		(SELECT	labConfHIS
+		FROM	sigh.dbo.AtencionesDiagnosticos
+		where  IdAtencion=@codAtencion and IdDiagnostico = @iddiag--(select IdDiagnostico from sigh.dbo.Diagnosticos where codigoCIEsinPto = 'S411 ')
+		ORDER BY   IdAtencion
+		OFFSET 0 ROWS   -- Skip this number of rows
+		FETCH NEXT 1 ROW ONLY ) -- Return this number of rows
+
+		UPDATE TRAMA_INTEGRACION SET V_CITA_ITEMS_VALOR_LAB_1 = @LAB WHERE  V_CITA_ORIGEN = @codAtencion AND V_CITA_ITEMS_CODIGO = @Diagnostico
+
+		--LLENANDO EL SEGUNDO LAB
+		SET @LAB =
+		(SELECT	labConfHIS
+		FROM	sigh.dbo.AtencionesDiagnosticos
+		where  IdAtencion=@codAtencion and IdDiagnostico = @iddiag--(select IdDiagnostico from sigh.dbo.Diagnosticos where codigoCIEsinPto = 'S411 ')
+		ORDER BY   IdAtencion
+		OFFSET 1 ROWS   -- Skip this number of rows
+		FETCH NEXT 1 ROW ONLY ) -- Return this number of rows
+
+		UPDATE TRAMA_INTEGRACION SET V_CITA_ITEMS_VALOR_LAB_2 = @LAB WHERE  V_CITA_ORIGEN = @codAtencion AND V_CITA_ITEMS_CODIGO = @Diagnostico
+
+		--LLENANDO EL TERCER LAB
+		SET @LAB =
+		(SELECT	labConfHIS
+		FROM	sigh.dbo.AtencionesDiagnosticos
+		where  IdAtencion=@codAtencion and IdDiagnostico = @iddiag--(select IdDiagnostico from sigh.dbo.Diagnosticos where codigoCIEsinPto = 'S411 ')
+		ORDER BY   IdAtencion
+		OFFSET 2 ROWS   -- Skip this number of rows
+		FETCH NEXT 1 ROW ONLY ) -- Return this number of rows
+
+		UPDATE TRAMA_INTEGRACION SET V_CITA_ITEMS_VALOR_LAB_3 = @LAB WHERE  V_CITA_ORIGEN = @codAtencion AND V_CITA_ITEMS_CODIGO = @Diagnostico
+
+		FETCH NEXT FROM AtencionesTrama INTO @codAtencion,@Diagnostico
+END
+CLOSE AtencionesTrama
+DEALLOCATE AtencionesTrama
+
+-- ACTUALIZA EL ESATADO DE LOS CAMPOS ENVIADOS AL PROCESADOR
+-- lo realiza seleccionando los campos con el mismo id atencion en cita y atenciones
+--  y solo los que tengan estado de envio 0 y estado de cita atendido (2)
+UPDATE	sigh.dbo.Atenciones
+SET		sigh.dbo.Atenciones.ENVIADO_HISWEB = 1
+FROM	sigh.dbo.Atenciones
+INNER JOIN sigh.dbo.citas ON sigh.dbo.Atenciones.IdAtencion = sigh.dbo.citas.IdAtencion
+INNER JOIN TRAMA_INTEGRACION on V_CITA_ORIGEN = sigh.dbo.Atenciones.IdAtencion
+WHERE	sigh.dbo.Atenciones.ENVIADO_HISWEB = 0 and sigh.dbo.Citas.IdEstadoCita =2
+
+---INTEGRACION CON CPTS LABO Y DIAG.IMG
+INSERT INTO
+	BDHIS_MINSA.dbo.TRAMA_INTEGRACION
+	(
+	V_CITA_ITEMS_CODIGO,V_CITA_ITEMS_TIPO_DIAGNOSTICO,V_CITA_ITEMS_VALOR_LAB_1,
+	V_CITA_ORIGEN, V_CITA_NUMERO_AFILIACION, V_CITA_FECHA_ATENCION,/*C_CITA_ITEMS_VALOR_LAB_1, C_CITA_ITEMS_VALOR_LAB_2, C_CITA_ITEMS_VALOR_LAB_3,*/
+	V_CITA_ID_UPS, I_CITA_CODIGO_ESTABLECIMIENTO,
+	I_CITA_DIA_EDAD, I_CITA_MES_EDAD, I_CITA_ANNIO_EDAD, I_CITA_EDAD_REGISTRO, V_CITA_ID_TIPO_EDAD_REGISTRO,
+	V_CITA_ID_TURNO, I_CITA_FGDIG, I_CITA_COMPONENTE,V_CITA_ID_FINANCIADOR, I_CITA_OTRA_CONDICION,V_CITA_FECHA_ULTIMA_REGLA, V_CITA_ESTADO_REGISTRO,
+	D_CITA_EXAMENFISICO_PESO, D_CITA_EXAMENFISICO_TALLA,D_CITA_EXAMENFISICO_HEMOGLOBINA, D_CITA_EXAMENFISICO_PER_ABDOMINAL, D_CITA_EXAMENFISICO_PER_CEFALICO,
+	I_PEREGISTRA_ID_TIPODOC, V_PEREGISTRA_NRO_DOCUMENTO,V_PEREGISTRA_APEPATERNO, V_PEREGISTRA_APEMATERNO, V_PEREGISTRA_NOMBRES, V_PEREGISTRA_SEXO, V_PEREGISTRA_FECHA_NACIMIENTO, V_PEREGISTRA_ID_PROFESION,V_PEREGISTRA_ID_PAIS, V_PEREGISTRA_CONDICION, V_PEREGISTRA_ID_FLAG,
+	I_PEATIENDE_ID_TIPODOC, V_PEATIENDE_NRO_DOCUMENTO, V_PEATIENDE_APEPATERNO,V_PEATIENDE_APEMATERNO, V_PEATIENDE_NOMBRES, V_PEATIENDE_SEXO, V_PEATIENDE_FECHA_NACIMIENTO, V_PEATIENDE_ID_PROFESION, V_PEATIENDE_ID_PAIS,V_PEATIENDE_CONDICION, V_PEATIENDE_ID_FLAG,
+	I_PACIENTE_ID_TIPODOC,V_PACIENTE_NRO_DOCUMENTO, V_PACIENTE_NRO_HC, V_PACIENTE_APEPATERNO, V_PACIENTE_APEMATERNO,V_PACIENTE_NOMBRES, V_PACIENTE_SEXO, V_PACIENTE_FECHA_NACIMIENTO, V_PACIENTE_ID_PAIS, V_PACIENTE_ID_ETNIA, I_PACIENTE_CODIGO_ESTABLECIMIENTO, V_PACIENTE_ID_FLAG
+	)
+SELECT
+	--FacturacionServicioDespacho.IdProducto,FacturacionServicioDespacho.labConfHIS,
+	distinct(FactCatalogoServiciosN.IdProducto),'D'/**FactCatalogoServiciosN.IdSubclasificacionDx**/,FactCatalogoServiciosN.valores,
+	V_CITA_ORIGEN, V_CITA_NUMERO_AFILIACION, V_CITA_FECHA_ATENCION,--v_CITA_ITEMS_VALOR_LAB_2, V_CITA_ITEMS_VALOR_LAB_3,
+	V_CITA_ID_UPS, I_CITA_CODIGO_ESTABLECIMIENTO,
+	I_CITA_DIA_EDAD, I_CITA_MES_EDAD, I_CITA_ANNIO_EDAD, I_CITA_EDAD_REGISTRO, V_CITA_ID_TIPO_EDAD_REGISTRO,
+	V_CITA_ID_TURNO, I_CITA_FGDIG, I_CITA_COMPONENTE,V_CITA_ID_FINANCIADOR, I_CITA_OTRA_CONDICION,V_CITA_FECHA_ULTIMA_REGLA, V_CITA_ESTADO_REGISTRO,
+	D_CITA_EXAMENFISICO_PESO, D_CITA_EXAMENFISICO_TALLA,D_CITA_EXAMENFISICO_HEMOGLOBINA, D_CITA_EXAMENFISICO_PER_ABDOMINAL, D_CITA_EXAMENFISICO_PER_CEFALICO,
+	I_PEREGISTRA_ID_TIPODOC, V_PEREGISTRA_NRO_DOCUMENTO,V_PEREGISTRA_APEPATERNO, V_PEREGISTRA_APEMATERNO, V_PEREGISTRA_NOMBRES, V_PEREGISTRA_SEXO, V_PEREGISTRA_FECHA_NACIMIENTO, V_PEREGISTRA_ID_PROFESION,V_PEREGISTRA_ID_PAIS, V_PEREGISTRA_CONDICION, V_PEREGISTRA_ID_FLAG,
+	I_PEATIENDE_ID_TIPODOC, V_PEATIENDE_NRO_DOCUMENTO, V_PEATIENDE_APEPATERNO,V_PEATIENDE_APEMATERNO, V_PEATIENDE_NOMBRES, V_PEATIENDE_SEXO, V_PEATIENDE_FECHA_NACIMIENTO, V_PEATIENDE_ID_PROFESION, V_PEATIENDE_ID_PAIS,V_PEATIENDE_CONDICION, V_PEATIENDE_ID_FLAG,
+	I_PACIENTE_ID_TIPODOC,V_PACIENTE_NRO_DOCUMENTO, V_PACIENTE_NRO_HC, V_PACIENTE_APEPATERNO, V_PACIENTE_APEMATERNO,V_PACIENTE_NOMBRES, V_PACIENTE_SEXO, V_PACIENTE_FECHA_NACIMIENTO, V_PACIENTE_ID_PAIS, V_PACIENTE_ID_ETNIA, I_PACIENTE_CODIGO_ESTABLECIMIENTO, V_PACIENTE_ID_FLAG
+FROM TRAMA_INTEGRACION
+inner join sigh.dbo.FactCatalogoServiciosN on FactCatalogoServiciosN.IdAtencion = TRAMA_INTEGRACION.V_CITA_ORIGEN
+where TRAMA_INTEGRACION.I_ESTADO=0
+GO
+/****** Object:  StoredProcedure [dbo].[USP_INTEGRACION_generarJsonIntegracion]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[USP_INTEGRACION_generarJsonIntegracion]
+WITH EXECUTE AS CALLER
+AS
+BEGIN
+
+	IF EXISTS (SELECT V_CITA_ORIGEN FROM TRAMA_INTEGRACION_CITA) BEGIN DELETE TRAMA_INTEGRACION_CITA END
+	IF EXISTS (SELECT V_CITA_ORIGEN FROM TRAMA_INTEGRACION_CITA_DX) BEGIN DELETE TRAMA_INTEGRACION_CITA_DX END
+	IF EXISTS (SELECT V_CITA_ORIGEN FROM TRAMA_INTEGRACION_PERSONAL_REGISTRA_ATIENDE) BEGIN DELETE TRAMA_INTEGRACION_PERSONAL_REGISTRA_ATIENDE END
+	IF EXISTS (SELECT V_CITA_ORIGEN FROM TRAMA_INTEGRACION_PACIENTE) BEGIN DELETE TRAMA_INTEGRACION_PACIENTE END
+	IF EXISTS (SELECT V_CITA_ORIGEN FROM TRAMA_INTEGRACION_DX_CITA_TMP) BEGIN DELETE TRAMA_INTEGRACION_DX_CITA_TMP END
+	IF EXISTS (SELECT V_CITA_ORIGEN FROM TRAMA_INTEGRACION_DX_CITA) BEGIN DELETE TRAMA_INTEGRACION_DX_CITA END
+
+	-- DEPURACION PARA TRAMA_INTEGRACION ANTES DE PROCESAR
+	EXEC USP_INTEGRACION_UPD_DEPURA
+
+	-- INSERCION DE CITA
+	INSERT INTO TRAMA_INTEGRACION_CITA (V_CITA_ORIGEN, V_JSON)--aqui, 9 etnias encontradas
+	SELECT DISTINCT
+		V_CITA_ORIGEN,
+		CONCAT(
+		'"edadregistro":"', CAST(I_CITA_EDAD_REGISTRO AS VARCHAR(MAX)), '", ',
+		'"idtipedadregistro":"', CAST(V_CITA_ID_TIPO_EDAD_REGISTRO AS VARCHAR(MAX)), '", ',
+		'"diaedad":"', CAST(I_CITA_DIA_EDAD AS VARCHAR(MAX)), '", ',
+		'"mesedad":"', CAST(I_CITA_MES_EDAD AS VARCHAR(MAX)), '", ',
+		'"annioedad":"', CAST(I_CITA_ANNIO_EDAD AS VARCHAR(MAX)), '", ',
+		'"idfinanciador":"', CAST(V_CITA_ID_FINANCIADOR AS VARCHAR(MAX)), '", ',
+		'"idturno":"', CAST(V_CITA_ID_TURNO AS VARCHAR(MAX)), '", ',
+		'"componente": "",',
+		'"idestablecimiento":"', CAST(I_CITA_CODIGO_ESTABLECIMIENTO AS VARCHAR(MAX)), '", ',
+		'"numeroafiliacion":"', CAST(V_CITA_NUMERO_AFILIACION AS VARCHAR(MAX)), '", ',
+		'"fechaatencion":"', CAST(V_CITA_FECHA_ATENCION AS VARCHAR(MAX)), '", ',
+		'"idups":"', CAST(V_CITA_ID_UPS AS VARCHAR(MAX)), '", ',
+		'"estadoregistro":"', CAST(V_CITA_ESTADO_REGISTRO AS VARCHAR(MAX)), '", ',
+		'"fgdiag":"', CAST(I_CITA_FGDIG AS VARCHAR(MAX)), '", ',
+		'"items": [')
+	FROM TRAMA_INTEGRACION WHERE I_ESTADO=0
+	PRINT 'INSERT TRAMA_INTEGRACION_CITA' --->ok
+
+	-- INSERCION DE CITA CON SUS DX
+	INSERT INTO TRAMA_INTEGRACION_CITA_DX (V_CITA_ORIGEN, V_CITA_ITEMS_CODIGO, V_CITA_ITEMS_TIPO_DIAGNOSTICO, V_CITA_ITEMS_VALOR_LAB_1, V_CITA_ITEMS_VALOR_LAB_2, V_CITA_ITEMS_VALOR_LAB_3, V_JSON)
+	SELECT
+		V_CITA_ORIGEN,
+		V_CITA_ITEMS_CODIGO,
+		V_CITA_ITEMS_TIPO_DIAGNOSTICO,
+		V_CITA_ITEMS_VALOR_LAB_1,
+		V_CITA_ITEMS_VALOR_LAB_2,
+		V_CITA_ITEMS_VALOR_LAB_3,
+		CONCAT(
+		'{',
+		'"codigo":"' , CAST(V_CITA_ITEMS_CODIGO AS VARCHAR(MAX)) , '", ',
+	--	'"tipoitem":"', CAST((SELECT Fg_Tipo FROM MAESTRO_HIS_CIE_CPMS WHERE Codigo_Item IN (V_CITA_ITEMS_CODIGO)) AS VARCHAR(MAX)) , '", ', --> se comenta por el SOL0025,
+		'"tipoitem":"', CAST((SELECT top 1 Fg_Tipo FROM MAESTRO_HIS_CIE_CPMS WHERE Codigo_Item IN (V_CITA_ITEMS_CODIGO) order by Fg_Estado desc) AS VARCHAR(MAX)) , '", ', --> SOL0025, se agrega la validacion del fg_estado activo, para que no tome mas registros inactivos
+
+		'"tipodiagnostico":"' , CAST(V_CITA_ITEMS_TIPO_DIAGNOSTICO AS VARCHAR(MAX)) , '", ',
+		'"labs": [',
+		CASE WHEN (V_CITA_ITEMS_VALOR_LAB_1 IS NOT NULL) THEN (+'{"codigo":' + '"", '+
+		'"valor":"'+ CAST(V_CITA_ITEMS_VALOR_LAB_1 AS VARCHAR(MAX)) + '"}') END,
+
+		CASE WHEN (V_CITA_ITEMS_VALOR_LAB_1 IS NOT NULL AND V_CITA_ITEMS_VALOR_LAB_2 IS NOT NULL) THEN (+',{"codigo":' + '"", '+
+		'"valor":"'+ CAST(V_CITA_ITEMS_VALOR_LAB_2 AS VARCHAR(MAX)) + '"}') END,
+
+		CASE WHEN (V_CITA_ITEMS_VALOR_LAB_1 IS NOT NULL AND V_CITA_ITEMS_VALOR_LAB_2 IS NOT NULL AND V_CITA_ITEMS_VALOR_LAB_3 IS NOT NULL) THEN (+',{"codigo":' + '"", '+
+		'"valor":"'+ CAST(V_CITA_ITEMS_VALOR_LAB_3 AS VARCHAR(MAX)) + '"}]}')  ELSE ']}' END
+		)
+	FROM TRAMA_INTEGRACION WHERE I_ESTADO=0
+	PRINT 'INSERT TRAMA_INTEGRACION_CITA_DX'
+
+	-- INSERCION DE PERSONAL QUE ATIENDE Y REGISTRA
+	INSERT INTO TRAMA_INTEGRACION_PERSONAL_REGISTRA_ATIENDE (V_CITA_ORIGEN, V_JSON)
+	SELECT DISTINCT
+		V_CITA_ORIGEN,
+		CONCAT(
+		'"personal_registra": {',
+		'"idtipodoc":"' , CAST([I_PEREGISTRA_ID_TIPODOC] AS VARCHAR(MAX)) , '", ',
+		'"nrodocumento":"', CAST([V_PEREGISTRA_NRO_DOCUMENTO] AS VARCHAR(MAX)) , '", ',
+		'"apepaterno":"', CAST([V_PEREGISTRA_APEPATERNO] AS VARCHAR(MAX)) , '", ',
+		'"apematerno":"', CAST([V_PEREGISTRA_APEMATERNO] AS VARCHAR(MAX)) , '", ',
+		'"nombres":"', CAST([V_PEREGISTRA_NOMBRES] AS VARCHAR(MAX)) , '", ',
+		'"fechanacimiento":"', CAST([V_PEREGISTRA_FECHA_NACIMIENTO] AS VARCHAR(MAX)) , '", ',
+		'"idsexo":"', CAST([V_PEREGISTRA_SEXO] AS VARCHAR(MAX)) , '", ',
+		'"idpais":"', CAST([V_PEREGISTRA_ID_PAIS] AS VARCHAR(MAX)) , '", ',
+		'"idprofesion":"', CAST([V_PEREGISTRA_ID_PROFESION] AS VARCHAR(MAX)) , '", ',
+		'"idcondicion":"', CAST([V_PEREGISTRA_CONDICION] AS VARCHAR(MAX))  , '"}',
+		',"personal_atiende": {',
+		'"idtipodoc":"' , CAST([I_PEATIENDE_ID_TIPODOC] AS VARCHAR(MAX)) , '", ',
+		'"nrodocumento":"', CAST([V_PEATIENDE_NRO_DOCUMENTO] AS VARCHAR(MAX)) , '", ',
+		'"apepaterno":"', CAST([V_PEATIENDE_APEPATERNO] AS VARCHAR(MAX)) , '", ',
+		'"apematerno":"', CAST([V_PEATIENDE_APEMATERNO] AS VARCHAR(MAX)) , '", ',
+		'"nombres":"', CAST([V_PEATIENDE_NOMBRES] AS VARCHAR(MAX)) , '", ',
+		'"fechanacimiento":"', CAST([V_PEATIENDE_FECHA_NACIMIENTO] AS VARCHAR(MAX)) , '", ',
+		'"idsexo":"', CAST([V_PEATIENDE_SEXO] AS VARCHAR(MAX)) , '", ',
+		'"idpais":"', CAST([V_PEATIENDE_ID_PAIS] AS VARCHAR(MAX)) , '", ',
+		'"idprofesion":"', CAST([V_PEATIENDE_ID_PROFESION] AS VARCHAR(MAX)) , '", ',
+		'"idcondicion":"', CAST([V_PEATIENDE_CONDICION] AS VARCHAR(MAX))  , '"}')
+	FROM TRAMA_INTEGRACION WHERE I_ESTADO=0
+	PRINT 'INSERT TRAMA_INTEGRACION_PERSONAL_REGISTRA_ATIENDE'
+
+	-- INSERCION DE PACIENTE
+	INSERT INTO TRAMA_INTEGRACION_PACIENTE (V_CITA_ORIGEN, V_JSON)
+	SELECT DISTINCT
+		V_CITA_ORIGEN,
+		CONCAT(
+		'"paciente": {',
+		'"idtipodoc":"' , CAST(I_PACIENTE_ID_TIPODOC AS VARCHAR(MAX)) , '", ',
+		'"nrodocumento":"', CAST(V_PACIENTE_NRO_DOCUMENTO AS VARCHAR(MAX)) , '", ',
+		'"apepaterno":"', CAST(V_PACIENTE_APEPATERNO AS VARCHAR(MAX)) , '", ',
+		'"apematerno":"', CAST(V_PACIENTE_APEMATERNO AS VARCHAR(MAX)) , '", ',
+		'"nombres":"', CAST(V_PACIENTE_NOMBRES AS VARCHAR(MAX)) , '", ',
+		'"fechanacimiento":"', CAST(V_PACIENTE_FECHA_NACIMIENTO AS VARCHAR(MAX)) , '", ',
+		'"idsexo":"', CAST(V_PACIENTE_SEXO AS VARCHAR(MAX)) , '", ',
+		'"idflag":"', CAST(V_PACIENTE_ID_FLAG AS VARCHAR(MAX)) , '", ',
+		'"idpais":"', CAST(V_PACIENTE_ID_PAIS AS VARCHAR(MAX)) , '", ',
+		'"idestablecimiento":"', CAST(I_PACIENTE_CODIGO_ESTABLECIMIENTO AS VARCHAR(MAX)) , '", ',
+		'"idetnia":"', CAST(V_PACIENTE_ID_ETNIA AS VARCHAR(MAX)) , '", ',
+		'"nrohistoriaclinica":"', CAST(V_PACIENTE_NRO_HC AS VARCHAR(MAX)) , '"}')
+	FROM TRAMA_INTEGRACION WHERE I_ESTADO=0
+	PRINT 'INSERT TRAMA_INTEGRACION_PACIENTE'
+
+	-- INSERCION DE CITA CON SUS DX TEMPORAL
+	INSERT INTO TRAMA_INTEGRACION_DX_CITA_TMP (V_CITA_ORIGEN, V_JSON)
+	SELECT
+		V_CITA_ORIGEN,
+		STUFF(	(SELECT
+				b.[V_JSON] + ', '
+				FROM TRAMA_INTEGRACION_CITA_DX AS b
+				WHERE b.V_CITA_ORIGEN = a.V_CITA_ORIGEN
+				FOR XML PATH (''))
+				, 1, 0, '')  AS [CitasConcatenados]
+	FROM TRAMA_INTEGRACION_CITA AS a
+	GROUP BY V_CITA_ORIGEN
+	PRINT 'INSERT TRAMA_INTEGRACION_DX_CITA_TMP'
+
+	 -- INSERCION DE CITA CON SUS DX
+	INSERT INTO TRAMA_INTEGRACION_DX_CITA (V_CITA_ORIGEN, V_JSON)
+	SELECT
+		V_CITA_ORIGEN,
+		SUBSTRING ([V_JSON], 1 , LEN([V_JSON])-1)
+	FROM TRAMA_INTEGRACION_DX_CITA_TMP
+	PRINT 'INSERT TRAMA_INTEGRACION_DX_CITA'
+
+	  -- INSERCION DE TRAMA_INTEGRACION_CITA_JSON
+	INSERT INTO TRAMA_INTEGRACION_HISMINSA_JSON (V_CITA_ORIGEN, V_JSON)
+	SELECT
+		C.V_CITA_ORIGEN,
+		CONCAT('{', PR.V_JSON, ',', PA.V_JSON, ',"cita": {', C.V_JSON, DX.V_JSON, ']}}')
+	FROM TRAMA_INTEGRACION_CITA C
+	INNER JOIN TRAMA_INTEGRACION_PERSONAL_REGISTRA_ATIENDE PR ON PR.V_CITA_ORIGEN=C.V_CITA_ORIGEN
+	INNER JOIN TRAMA_INTEGRACION_PACIENTE PA ON PA.V_CITA_ORIGEN=C.V_CITA_ORIGEN
+	INNER JOIN TRAMA_INTEGRACION_DX_CITA DX ON DX.V_CITA_ORIGEN=C.V_CITA_ORIGEN
+	PRINT 'INSERT TRAMA_INTEGRACION_HISMINSA_JSON'
+
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=1,
+		V_DESCRIPCION_RESPUESTA='PROCESADO_EXITOSO',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE I_ESTADO=0
+	PRINT 'UPDATE TRAMA_INTEGRACION'
+
+	DELETE TRAMA_INTEGRACION_CITA
+	DELETE TRAMA_INTEGRACION_CITA_DX
+	DELETE TRAMA_INTEGRACION_PERSONAL_REGISTRA_ATIENDE
+	DELETE TRAMA_INTEGRACION_PACIENTE
+	DELETE TRAMA_INTEGRACION_DX_CITA
+	DELETE TRAMA_INTEGRACION_DX_CITA_TMP
+END
+GO
+/****** Object:  StoredProcedure [dbo].[USP_INTEGRACION_generarJsonIntegracion_SIN_NDEPURA]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[USP_INTEGRACION_generarJsonIntegracion_SIN_NDEPURA]
+WITH EXECUTE AS CALLER
+AS
+BEGIN
+
+	IF EXISTS (SELECT V_CITA_ORIGEN FROM TRAMA_INTEGRACION_CITA) BEGIN DELETE TRAMA_INTEGRACION_CITA END
+	IF EXISTS (SELECT V_CITA_ORIGEN FROM TRAMA_INTEGRACION_CITA_DX) BEGIN DELETE TRAMA_INTEGRACION_CITA_DX END
+	IF EXISTS (SELECT V_CITA_ORIGEN FROM TRAMA_INTEGRACION_PERSONAL_REGISTRA_ATIENDE) BEGIN DELETE TRAMA_INTEGRACION_PERSONAL_REGISTRA_ATIENDE END
+	IF EXISTS (SELECT V_CITA_ORIGEN FROM TRAMA_INTEGRACION_PACIENTE) BEGIN DELETE TRAMA_INTEGRACION_PACIENTE END
+	IF EXISTS (SELECT V_CITA_ORIGEN FROM TRAMA_INTEGRACION_DX_CITA_TMP) BEGIN DELETE TRAMA_INTEGRACION_DX_CITA_TMP END
+	IF EXISTS (SELECT V_CITA_ORIGEN FROM TRAMA_INTEGRACION_DX_CITA) BEGIN DELETE TRAMA_INTEGRACION_DX_CITA END
+
+	-- DEPURACION PARA TRAMA_INTEGRACION ANTES DE PROCESAR
+---	EXEC USP_INTEGRACION_UPD_DEPURA
+
+	-- INSERCION DE CITA
+	INSERT INTO TRAMA_INTEGRACION_CITA (V_CITA_ORIGEN, V_JSON)
+	SELECT DISTINCT
+		V_CITA_ORIGEN,
+		CONCAT(
+		'"edadregistro":"', CAST(I_CITA_EDAD_REGISTRO AS VARCHAR(MAX)), '", ',
+		'"idtipedadregistro":"', CAST(V_CITA_ID_TIPO_EDAD_REGISTRO AS VARCHAR(MAX)), '", ',
+		'"diaedad":"', CAST(I_CITA_DIA_EDAD AS VARCHAR(MAX)), '", ',
+		'"mesedad":"', CAST(I_CITA_MES_EDAD AS VARCHAR(MAX)), '", ',
+		'"annioedad":"', CAST(I_CITA_ANNIO_EDAD AS VARCHAR(MAX)), '", ',
+		'"idfinanciador":"', CAST(V_CITA_ID_FINANCIADOR AS VARCHAR(MAX)), '", ',
+		'"idturno":"', CAST(V_CITA_ID_TURNO AS VARCHAR(MAX)), '", ',
+		'"componente": "",',
+		'"idestablecimiento":"', CAST(I_CITA_CODIGO_ESTABLECIMIENTO AS VARCHAR(MAX)), '", ',
+		'"numeroafiliacion":"', CAST(V_CITA_NUMERO_AFILIACION AS VARCHAR(MAX)), '", ',
+		'"fechaatencion":"', CAST(V_CITA_FECHA_ATENCION AS VARCHAR(MAX)), '", ',
+		'"idups":"', CAST(V_CITA_ID_UPS AS VARCHAR(MAX)), '", ',
+		'"estadoregistro":"', CAST(V_CITA_ESTADO_REGISTRO AS VARCHAR(MAX)), '", ',
+		'"fgdiag":"', CAST(I_CITA_FGDIG AS VARCHAR(MAX)), '", ',
+		'"items": [')
+	FROM TRAMA_INTEGRACION WHERE I_ESTADO=0
+	PRINT 'INSERT TRAMA_INTEGRACION_CITA'
+
+	-- INSERCION DE CITA CON SUS DX
+	INSERT INTO TRAMA_INTEGRACION_CITA_DX (V_CITA_ORIGEN, V_CITA_ITEMS_CODIGO, V_CITA_ITEMS_TIPO_DIAGNOSTICO, V_CITA_ITEMS_VALOR_LAB_1, V_CITA_ITEMS_VALOR_LAB_2, V_CITA_ITEMS_VALOR_LAB_3, V_JSON)
+	SELECT
+		V_CITA_ORIGEN,
+		V_CITA_ITEMS_CODIGO,
+		V_CITA_ITEMS_TIPO_DIAGNOSTICO,
+		V_CITA_ITEMS_VALOR_LAB_1,
+		V_CITA_ITEMS_VALOR_LAB_2,
+		V_CITA_ITEMS_VALOR_LAB_3,
+		CONCAT(
+		'{',
+		'"codigo":"' , CAST(V_CITA_ITEMS_CODIGO AS VARCHAR(MAX)) , '", ',
+		'"tipoitem":"', CAST((SELECT Fg_Tipo FROM MAESTRO_HIS_CIE_CPMS WHERE Codigo_Item IN (V_CITA_ITEMS_CODIGO)) AS VARCHAR(MAX)) , '", ',
+		'"tipodiagnostico":"' , CAST(V_CITA_ITEMS_TIPO_DIAGNOSTICO AS VARCHAR(MAX)) , '", ',
+		'"labs": [',
+		CASE WHEN (V_CITA_ITEMS_VALOR_LAB_1 IS NOT NULL) THEN (+'{"codigo":' + '"", '+
+		'"valor":"'+ CAST(V_CITA_ITEMS_VALOR_LAB_1 AS VARCHAR(MAX)) + '"}') END,
+
+		CASE WHEN (V_CITA_ITEMS_VALOR_LAB_1 IS NOT NULL AND V_CITA_ITEMS_VALOR_LAB_2 IS NOT NULL) THEN (+',{"codigo":' + '"", '+
+		'"valor":"'+ CAST(V_CITA_ITEMS_VALOR_LAB_2 AS VARCHAR(MAX)) + '"}') END,
+
+		CASE WHEN (V_CITA_ITEMS_VALOR_LAB_1 IS NOT NULL AND V_CITA_ITEMS_VALOR_LAB_2 IS NOT NULL AND V_CITA_ITEMS_VALOR_LAB_3 IS NOT NULL) THEN (+',{"codigo":' + '"", '+
+		'"valor":"'+ CAST(V_CITA_ITEMS_VALOR_LAB_3 AS VARCHAR(MAX)) + '"}]}')  ELSE ']}' END)
+	FROM TRAMA_INTEGRACION WHERE I_ESTADO=0
+	PRINT 'INSERT TRAMA_INTEGRACION_CITA_DX'
+
+	-- INSERCION DE PERSONAL QUE ATIENDE Y REGISTRA
+	INSERT INTO TRAMA_INTEGRACION_PERSONAL_REGISTRA_ATIENDE (V_CITA_ORIGEN, V_JSON)
+	SELECT DISTINCT
+		V_CITA_ORIGEN,
+		CONCAT(
+		'"personal_registra": {',
+		'"idtipodoc":"' , CAST([I_PEREGISTRA_ID_TIPODOC] AS VARCHAR(MAX)) , '", ',
+		'"nrodocumento":"', CAST([V_PEREGISTRA_NRO_DOCUMENTO] AS VARCHAR(MAX)) , '", ',
+		'"apepaterno":"', CAST([V_PEREGISTRA_APEPATERNO] AS VARCHAR(MAX)) , '", ',
+		'"apematerno":"', CAST([V_PEREGISTRA_APEMATERNO] AS VARCHAR(MAX)) , '", ',
+		'"nombres":"', CAST([V_PEREGISTRA_NOMBRES] AS VARCHAR(MAX)) , '", ',
+		'"fechanacimiento":"', CAST([V_PEREGISTRA_FECHA_NACIMIENTO] AS VARCHAR(MAX)) , '", ',
+		'"idsexo":"', CAST([V_PEREGISTRA_SEXO] AS VARCHAR(MAX)) , '", ',
+		'"idpais":"', CAST([V_PEREGISTRA_ID_PAIS] AS VARCHAR(MAX)) , '", ',
+		'"idprofesion":"', CAST([V_PEREGISTRA_ID_PROFESION] AS VARCHAR(MAX)) , '", ',
+		'"idcondicion":"', CAST([V_PEREGISTRA_CONDICION] AS VARCHAR(MAX))  , '"}',
+		',"personal_atiende": {',
+		'"idtipodoc":"' , CAST([I_PEATIENDE_ID_TIPODOC] AS VARCHAR(MAX)) , '", ',
+		'"nrodocumento":"', CAST([V_PEATIENDE_NRO_DOCUMENTO] AS VARCHAR(MAX)) , '", ',
+		'"apepaterno":"', CAST([V_PEATIENDE_APEPATERNO] AS VARCHAR(MAX)) , '", ',
+		'"apematerno":"', CAST([V_PEATIENDE_APEMATERNO] AS VARCHAR(MAX)) , '", ',
+		'"nombres":"', CAST([V_PEATIENDE_NOMBRES] AS VARCHAR(MAX)) , '", ',
+		'"fechanacimiento":"', CAST([V_PEATIENDE_FECHA_NACIMIENTO] AS VARCHAR(MAX)) , '", ',
+		'"idsexo":"', CAST([V_PEATIENDE_SEXO] AS VARCHAR(MAX)) , '", ',
+		'"idpais":"', CAST([V_PEATIENDE_ID_PAIS] AS VARCHAR(MAX)) , '", ',
+		'"idprofesion":"', CAST([V_PEATIENDE_ID_PROFESION] AS VARCHAR(MAX)) , '", ',
+		'"idcondicion":"', CAST([V_PEATIENDE_CONDICION] AS VARCHAR(MAX))  , '"}')
+	FROM TRAMA_INTEGRACION WHERE I_ESTADO=0
+	PRINT 'INSERT TRAMA_INTEGRACION_PERSONAL_REGISTRA_ATIENDE'
+
+	-- INSERCION DE PACIENTE
+	INSERT INTO TRAMA_INTEGRACION_PACIENTE (V_CITA_ORIGEN, V_JSON)
+	SELECT DISTINCT
+		V_CITA_ORIGEN,
+		CONCAT(
+		'"paciente": {',
+		'"idtipodoc":"' , CAST(I_PACIENTE_ID_TIPODOC AS VARCHAR(MAX)) , '", ',
+		'"nrodocumento":"', CAST(V_PACIENTE_NRO_DOCUMENTO AS VARCHAR(MAX)) , '", ',
+		'"apepaterno":"', CAST(V_PACIENTE_APEPATERNO AS VARCHAR(MAX)) , '", ',
+		'"apematerno":"', CAST(V_PACIENTE_APEMATERNO AS VARCHAR(MAX)) , '", ',
+		'"nombres":"', CAST(V_PACIENTE_NOMBRES AS VARCHAR(MAX)) , '", ',
+		'"fechanacimiento":"', CAST(V_PACIENTE_FECHA_NACIMIENTO AS VARCHAR(MAX)) , '", ',
+		'"idsexo":"', CAST(V_PACIENTE_SEXO AS VARCHAR(MAX)) , '", ',
+		'"idflag":"', CAST(V_PACIENTE_ID_FLAG AS VARCHAR(MAX)) , '", ',
+		'"idpais":"', CAST(V_PACIENTE_ID_PAIS AS VARCHAR(MAX)) , '", ',
+		'"idestablecimiento":"', CAST(I_PACIENTE_CODIGO_ESTABLECIMIENTO AS VARCHAR(MAX)) , '", ',
+		'"idetnia":"', CAST(V_PACIENTE_ID_ETNIA AS VARCHAR(MAX)) , '", ',
+		'"nrohistoriaclinica":"', CAST(V_PACIENTE_NRO_HC AS VARCHAR(MAX)) , '"}')
+	FROM TRAMA_INTEGRACION WHERE I_ESTADO=0
+	PRINT 'INSERT TRAMA_INTEGRACION_PACIENTE'
+
+	-- INSERCION DE CITA CON SUS DX TEMPORAL
+	INSERT INTO TRAMA_INTEGRACION_DX_CITA_TMP (V_CITA_ORIGEN, V_JSON)
+	SELECT
+		V_CITA_ORIGEN,
+		STUFF(	(SELECT
+				b.[V_JSON] + ', '
+				FROM TRAMA_INTEGRACION_CITA_DX AS b
+				WHERE b.V_CITA_ORIGEN = a.V_CITA_ORIGEN
+				FOR XML PATH (''))
+				, 1, 0, '')  AS [CitasConcatenados]
+	FROM TRAMA_INTEGRACION_CITA AS a
+	GROUP BY V_CITA_ORIGEN
+	PRINT 'INSERT TRAMA_INTEGRACION_DX_CITA_TMP'
+
+	 -- INSERCION DE CITA CON SUS DX
+	INSERT INTO TRAMA_INTEGRACION_DX_CITA (V_CITA_ORIGEN, V_JSON)
+	SELECT
+		V_CITA_ORIGEN,
+		SUBSTRING ([V_JSON], 1 , LEN([V_JSON])-1)
+	FROM TRAMA_INTEGRACION_DX_CITA_TMP
+	PRINT 'INSERT TRAMA_INTEGRACION_DX_CITA'
+
+	  -- INSERCION DE TRAMA_INTEGRACION_CITA_JSON
+	INSERT INTO TRAMA_INTEGRACION_HISMINSA_JSON (V_CITA_ORIGEN, V_JSON)
+	SELECT
+		C.V_CITA_ORIGEN,
+		CONCAT('{', PR.V_JSON, ',', PA.V_JSON, ',"cita": {', C.V_JSON, DX.V_JSON, ']}}')
+	FROM TRAMA_INTEGRACION_CITA C
+	INNER JOIN TRAMA_INTEGRACION_PERSONAL_REGISTRA_ATIENDE PR ON PR.V_CITA_ORIGEN=C.V_CITA_ORIGEN
+	INNER JOIN TRAMA_INTEGRACION_PACIENTE PA ON PA.V_CITA_ORIGEN=C.V_CITA_ORIGEN
+	INNER JOIN TRAMA_INTEGRACION_DX_CITA DX ON DX.V_CITA_ORIGEN=C.V_CITA_ORIGEN
+	PRINT 'INSERT TRAMA_INTEGRACION_HISMINSA_JSON'
+
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=1,
+		V_DESCRIPCION_RESPUESTA='PROCESADO_EXITOSO',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE I_ESTADO=0
+	PRINT 'UPDATE TRAMA_INTEGRACION'
+
+	DELETE TRAMA_INTEGRACION_CITA
+	DELETE TRAMA_INTEGRACION_CITA_DX
+	DELETE TRAMA_INTEGRACION_PERSONAL_REGISTRA_ATIENDE
+	DELETE TRAMA_INTEGRACION_PACIENTE
+	DELETE TRAMA_INTEGRACION_DX_CITA
+	DELETE TRAMA_INTEGRACION_DX_CITA_TMP
+END
+GO
+/****** Object:  StoredProcedure [dbo].[USP_INTEGRACION_UPD_DEPURA]    Script Date: 12/01/2026 03:00:31 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[USP_INTEGRACION_UPD_DEPURA]
+WITH EXECUTE AS CALLER
+AS
+BEGIN
+	--REVISIONES GENERALES
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=2,
+		V_DESCRIPCION_RESPUESTA='CAMPOS_NULL_EN_NRO_Ó_TIPO_DOC',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE
+		I_ESTADO=0 AND (V_PACIENTE_NRO_DOCUMENTO IS NULL OR I_PACIENTE_ID_TIPODOC IS NULL)
+
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=2,
+		V_DESCRIPCION_RESPUESTA='NO_EXISTE_EN_MAESTRO_HIS_ESTABLECIMIENTO',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE
+		I_ESTADO=0 AND (
+		NOT EXISTS (SELECT B.Codigo_Unico FROM MAESTRO_HIS_ESTABLECIMIENTO B WHERE B.Codigo_Unico=ISNULL(TRAMA_INTEGRACION.I_CITA_CODIGO_ESTABLECIMIENTO,0)) OR
+		NOT EXISTS (SELECT B.Codigo_Unico FROM MAESTRO_HIS_ESTABLECIMIENTO B WHERE B.Codigo_Unico=ISNULL(TRAMA_INTEGRACION.I_PACIENTE_CODIGO_ESTABLECIMIENTO,0)))
+
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=2,
+		V_DESCRIPCION_RESPUESTA='NO_EXISTE_EN_MAESTRO_HIS_UPS',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE
+		I_ESTADO=0 AND
+		NOT EXISTS (SELECT B.Id_Ups FROM MAESTRO_HIS_UPS B WHERE B.Id_Ups=ISNULL(TRAMA_INTEGRACION.V_CITA_ID_UPS,0))
+
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=2,
+		V_DESCRIPCION_RESPUESTA='NO_EXISTE_EN_MAESTRO_HIS_ETNIA',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE
+		I_ESTADO=0 AND
+		NOT EXISTS (SELECT B.Id_Etnia FROM MAESTRO_HIS_ETNIA B WHERE B.Id_Etnia=ISNULL(TRAMA_INTEGRACION.V_PACIENTE_ID_ETNIA,0)) AND
+		TRAMA_INTEGRACION.V_PACIENTE_ID_ETNIA IS NOT NULL
+
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=2,
+		V_DESCRIPCION_RESPUESTA='NO_EXISTE_EN_MAESTRO_HIS_PAIS',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE
+		I_ESTADO=0 AND (
+		NOT EXISTS (SELECT B.Id_Pais FROM MAESTRO_HIS_PAIS B WHERE B.Id_Pais=ISNULL(TRAMA_INTEGRACION.V_PEREGISTRA_ID_PAIS,0)) OR
+		NOT EXISTS (SELECT B.Id_Pais FROM MAESTRO_HIS_PAIS B WHERE B.Id_Pais=ISNULL(TRAMA_INTEGRACION.V_PEATIENDE_ID_PAIS,0)) OR
+		(NOT EXISTS (SELECT B.Id_Pais FROM MAESTRO_HIS_PAIS B WHERE B.Id_Pais=ISNULL(TRAMA_INTEGRACION.V_PACIENTE_ID_PAIS,0)) AND
+		TRAMA_INTEGRACION.V_PACIENTE_ID_PAIS IS NOT NULL))
+
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=2,
+		V_DESCRIPCION_RESPUESTA='NO_EXISTE_EN_MAESTRO_HIS_TIPO_DOC',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE
+		I_ESTADO=0 AND (
+		NOT EXISTS (SELECT B.Id_Tipo_Documento FROM MAESTRO_HIS_TIPO_DOC B WHERE B.Id_Tipo_Documento=ISNULL(TRAMA_INTEGRACION.I_PEREGISTRA_ID_TIPODOC,0)) OR
+		NOT EXISTS (SELECT B.Id_Tipo_Documento FROM MAESTRO_HIS_TIPO_DOC B WHERE B.Id_Tipo_Documento=ISNULL(TRAMA_INTEGRACION.I_PEATIENDE_ID_TIPODOC,0)) OR
+		(NOT EXISTS (SELECT B.Id_Tipo_Documento FROM MAESTRO_HIS_TIPO_DOC B WHERE B.Id_Tipo_Documento=ISNULL(TRAMA_INTEGRACION.I_PACIENTE_ID_TIPODOC,0)) AND
+		TRAMA_INTEGRACION.I_PACIENTE_ID_TIPODOC IS NOT NULL))
+
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=2,
+		V_DESCRIPCION_RESPUESTA='NO_EXISTE_SEXO',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE
+		I_ESTADO=0 AND (
+		ISNULL(TRAMA_INTEGRACION.V_PEREGISTRA_SEXO,0) NOT IN('F','M') OR
+		ISNULL(TRAMA_INTEGRACION.V_PEATIENDE_SEXO,0) NOT IN('F','M') OR
+		(ISNULL(TRAMA_INTEGRACION.V_PACIENTE_SEXO,0) NOT IN('F','M') AND
+		TRAMA_INTEGRACION.V_PACIENTE_SEXO IS NOT NULL))
+
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=2,
+		V_DESCRIPCION_RESPUESTA='NO_EXISTE_TURNO',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE
+		I_ESTADO=0 AND
+		ISNULL(TRAMA_INTEGRACION.V_CITA_ID_TURNO,0) NOT IN('M','T','N')
+
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=2,
+		V_DESCRIPCION_RESPUESTA='NO_EXISTE_TIPO_EDAD_REGISTRO',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE
+		I_ESTADO=0 AND
+		ISNULL(TRAMA_INTEGRACION.V_CITA_ID_TIPO_EDAD_REGISTRO,0) NOT IN('D','M','A') AND
+		TRAMA_INTEGRACION.V_CITA_ID_TIPO_EDAD_REGISTRO IS NOT NULL
+
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=2,
+		V_DESCRIPCION_RESPUESTA='NO_EXISTE_TIPO_DIAGNOSTICO',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE
+		I_ESTADO=0 AND
+		ISNULL(TRAMA_INTEGRACION.V_CITA_ITEMS_TIPO_DIAGNOSTICO,0) NOT IN('D','P','R') AND
+		TRAMA_INTEGRACION.V_CITA_ITEMS_TIPO_DIAGNOSTICO IS NOT NULL
+
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=2,
+		V_DESCRIPCION_RESPUESTA='NO_EXISTE_CITA_ORIGEN',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE
+		I_ESTADO=0 AND
+		ISNULL(TRAMA_INTEGRACION.V_CITA_ORIGEN,0)=0
+
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=2,
+		V_DESCRIPCION_RESPUESTA='NO_EXISTE_FECHA_ATENCION',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE
+		I_ESTADO=0 AND
+		ISDATE(ISNULL(TRAMA_INTEGRACION.V_CITA_FECHA_ATENCION,0))=0
+
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=2,
+		V_DESCRIPCION_RESPUESTA='NO_EXISTE_EN_MAESTRO_HIS_CIE_CPMS',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE
+		I_ESTADO=0 AND
+		NOT EXISTS (SELECT B.Codigo_Item FROM MAESTRO_HIS_CIE_CPMS B WHERE B.Codigo_Item=ISNULL(TRAMA_INTEGRACION.V_CITA_ITEMS_CODIGO,0))
+
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=2,
+		V_DESCRIPCION_RESPUESTA='NO_EXISTE_EN_MAESTRO_HIS_OTRA_CONDICION',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE
+		I_ESTADO=0 AND
+		NOT EXISTS (SELECT B.Id_Otra_Condicion FROM MAESTRO_HIS_OTRA_CONDICION B WHERE B.Id_Otra_Condicion=ISNULL(TRAMA_INTEGRACION.I_CITA_OTRA_CONDICION,0)) AND
+		TRAMA_INTEGRACION.I_CITA_OTRA_CONDICION IS NOT NULL
+
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=2,
+		V_DESCRIPCION_RESPUESTA='NO_EXISTE_EN_MAESTRO_HIS_FINANCIADOR',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE
+		I_ESTADO=0 AND
+		NOT EXISTS (SELECT B.Id_Financiador FROM MAESTRO_HIS_FINANCIADOR B WHERE B.Id_Financiador=ISNULL(TRAMA_INTEGRACION.V_CITA_ID_FINANCIADOR,0)) AND
+		TRAMA_INTEGRACION.V_CITA_ID_FINANCIADOR IS NOT NULL
+
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=2,
+		V_DESCRIPCION_RESPUESTA='ERROR_FECHA_NACIMIENTO',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE
+		I_ESTADO=0 AND (
+		ISDATE(ISNULL(TRAMA_INTEGRACION.V_PEREGISTRA_FECHA_NACIMIENTO,0))=0 OR
+		ISDATE(ISNULL(TRAMA_INTEGRACION.V_PEATIENDE_FECHA_NACIMIENTO,0))=0 OR
+		(ISDATE(ISNULL(TRAMA_INTEGRACION.V_PACIENTE_FECHA_NACIMIENTO,0))=0 AND
+		TRAMA_INTEGRACION.V_PACIENTE_FECHA_NACIMIENTO IS NOT NULL))
+
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=2,
+		V_DESCRIPCION_RESPUESTA='NO_EXISTE_EN_MAESTRO_HIS_CONDICION_CONTRATO',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE
+		I_ESTADO=0 AND (
+		NOT EXISTS (SELECT B.Id_Condicion FROM MAESTRO_HIS_CONDICION_CONTRATO B WHERE B.Id_Condicion=ISNULL(TRAMA_INTEGRACION.V_PEREGISTRA_CONDICION,0)) OR
+		NOT EXISTS (SELECT B.Id_Condicion FROM MAESTRO_HIS_CONDICION_CONTRATO B WHERE B.Id_Condicion=ISNULL(TRAMA_INTEGRACION.V_PEATIENDE_CONDICION,0)))
+
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=2,
+		V_DESCRIPCION_RESPUESTA='NO_EXISTE_EN_MAESTRO_HIS_PROFESION',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE
+		I_ESTADO=0 AND (
+		NOT EXISTS (SELECT B.Id_Profesion FROM MAESTRO_HIS_PROFESION B WHERE B.Id_Profesion=ISNULL(TRAMA_INTEGRACION.V_PEREGISTRA_ID_PROFESION,0)) OR
+		NOT EXISTS (SELECT B.Id_Profesion FROM MAESTRO_HIS_PROFESION B WHERE B.Id_Profesion=ISNULL(TRAMA_INTEGRACION.V_PEATIENDE_ID_PROFESION,0)))
+
+	SELECT DISTINCT V_CITA_ORIGEN INTO #CITAS_ERRORES
+	FROM TRAMA_INTEGRACION WHERE I_ESTADO=2
+
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=2,
+		V_DESCRIPCION_RESPUESTA='EXISTE_CITA_CON_ERROR',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE
+		I_ESTADO=0 AND
+		V_CITA_ORIGEN IN (SELECT V_CITA_ORIGEN FROM #CITAS_ERRORES)
+
+
+	--VALIDACION CAMBIA DE ESTADO A CUALQUIER CITA QUE YA ESTA PROCESADA EN JSON Y LO PONE EN ESTADO 2
+	UPDATE TRAMA_INTEGRACION SET
+		I_ESTADO=2,
+		V_DESCRIPCION_RESPUESTA='EXISTE_EN_TRAMA_INTEGRACION_HISMINSA_JSON',
+		D_FECHA_PROCESAMIENTO=GETDATE()
+	WHERE
+		I_ESTADO=0 AND
+		V_CITA_ORIGEN IN (SELECT V_CITA_ORIGEN FROM TRAMA_INTEGRACION_HISMINSA_JSON)
+
+END
+GO
