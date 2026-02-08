@@ -1,6 +1,5 @@
 FROM mcr.microsoft.com/mssql/server:2019-latest
 USER root
-RUN mkdir -p /init-scripts
-WORKDIR /init-scripts
-COPY . /init-scripts/
-USER mssql
+WORKDIR /init
+COPY init.sql /init/
+# Sin ENTRYPOINT para que docker-compose pueda usar 'command' libremente
