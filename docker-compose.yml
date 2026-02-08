@@ -6,9 +6,6 @@ services:
     container_name: sigh-import-app
     ports:
       - "44321:44321"
-    depends_on:
-      db:
-        condition: service_healthy
     restart: unless-stopped
     deploy:
       resources:
@@ -16,46 +13,6 @@ services:
           memory: 512M
         reservations:
           memory: 128M
-
-  db:
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    container_name: sigh-import-db
     environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=YourStrong@Passw0rd
-      - MSSQL_PID=Developer
-    ports:
-      - "14333:1433"
-    restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          memory: 2G
-        reservations:
-          memory: 512M
-    healthcheck:
-      test: [ "CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P YourStrong@Passw0rd -Q 'SELECT 1' || /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P YourStrong@Passw0rd -C -Q 'SELECT 1' || exit 1" ]
-      interval: 10s
-      retries: 20
-      start_period: 15s
-      timeout: 5s
-
-  db-init:
-    build: ./docker/db-init
-    container_name: sigh-import-init
-    depends_on:
-      db:
-        condition: service_healthy
-    restart: "no"
-    command:
-      - /bin/bash
-      - -c
-      - |
-        echo 'Iniciando creación de tablas...'
-        if [ -f /opt/mssql-tools/bin/sqlcmd ]; then
-          SQLCMD=/opt/mssql-tools/bin/sqlcmd
-        else
-          SQLCMD=/opt/mssql-tools18/bin/sqlcmd
-        fi
-        $$SQLCMD -S db -U sa -P YourStrong@Passw0rd -C -d master -i /init/init.sql
-        echo 'Tablas creadas correctamente.'
+      - FLASK_ENV=production
+      - PYTHONUNBUFFERED=1

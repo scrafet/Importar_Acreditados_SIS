@@ -4,10 +4,8 @@ Este proyecto es una aplicación Python diseñada para gestionar la importación
 
 ## Estructura del Proyecto (Profesional)
 
-*   `src/`: Código fuente de la aplicación.
-    *   `app.py`: Aplicación principal (Flask).
-    *   `templates/`: Plantillas HTML (Premium).
-*   `Dockerfile`: Definición de la imagen Docker para la aplicación.
+*   `src/`: Código fuente de la aplicación Flask.
+*   `Dockerfile`: Definición de la imagen optimizada (Multi-stage).
 *   `docker-compose.yml`: Orquestación para el despliegue de la aplicación.
 
 ## Requisitos Previos
@@ -25,19 +23,14 @@ docker-compose up --build
 
 **Qué sucede:**
 1.  Se construye la imagen de la aplicación Python optimizada.
-2.  La aplicación estará disponible en `http://localhost:44321`.
-
 ### Paso 2: Configuración de Base de Datos
-La aplicación está diseñada para conectarse a un servidor SQL Server externo. Asegúrate de tener las credenciales y la IP del servidor preparadas para ingresarlas en la interfaz web.
+La aplicación requiere un servidor SQL Server externo (o uno ya existente en tu red). 
+1. Asegúrate de que la tabla `SisFiliaciones` esté creada en el servidor destino.
+2. Ingresa la IP, puerto y credenciales del servidor en la interfaz web de la aplicación.
 
 ### Paso 2: Verificar el despliegue
 
 *   **Aplicación web:** `http://localhost:44321`.
-*   **Base de datos:**
-    *   **Host:** `localhost`
-    *   **Puerto:** `14333`
-    *   **Usuario:** `sa`
-    *   **Contraseña:** `YourStrong@Passw0rd`
 
 ## Solución de Problemas
 
