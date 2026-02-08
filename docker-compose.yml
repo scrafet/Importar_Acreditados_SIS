@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     container_name: sigh-import-app
     ports:
-      - "8080:8080"
+      - "44321:44321"
     depends_on:
       db:
         condition: service_healthy

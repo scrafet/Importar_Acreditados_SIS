@@ -56,8 +56,8 @@ USER appuser
 
 # Healthcheck for the application
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8080/ || exit 1
+    CMD curl -f http://localhost:44321/ || exit 1
 
-EXPOSE 8080
+EXPOSE 44321
 
 CMD ["python", "app.py"]

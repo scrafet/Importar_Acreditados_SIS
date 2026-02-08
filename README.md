@@ -25,14 +25,14 @@ docker-compose up --build
 
 **Qué sucede:**
 1.  Se construye la imagen de la aplicación Python optimizada.
-2.  La aplicación estará disponible en `http://localhost:8080`.
+2.  La aplicación estará disponible en `http://localhost:44321`.
 
 ### Paso 2: Configuración de Base de Datos
 La aplicación está diseñada para conectarse a un servidor SQL Server externo. Asegúrate de tener las credenciales y la IP del servidor preparadas para ingresarlas en la interfaz web.
 
 ### Paso 2: Verificar el despliegue
 
-*   **Aplicación web:** `http://localhost:8080`.
+*   **Aplicación web:** `http://localhost:44321`.
 *   **Base de datos:**
     *   **Host:** `localhost`
     *   **Puerto:** `14333`
