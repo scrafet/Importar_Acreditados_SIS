@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGH | Importador SIS</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Light Theme Tokens */
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-input: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --accent-primary: #3b82f6;
+            --accent-hover: #2563eb;
+            --success: #10b981;
+            --danger: #ef4444;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            /* Dark Theme Tokens */
+            --bg-body: #020617;
+            --bg-card: #0f172a;
+            --bg-input: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border-color: #1e293b;
+            --accent-primary: #60a5fa;
+            --accent-hover: #93c5fd;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: var(--transition);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .header {
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h2 {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-body);
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 14px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        select.form-control {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* Progress Section */
+        .progress-side {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .progress-container {
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 12px 0;
+            display: none;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--accent-primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .log-container {
+            flex-grow: 1;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            font-family: 'Inter', monospace;
+            font-size: 12px;
+            overflow-y: auto;
+            max-height: 400px;
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 8px;
+        }
+
+        .log-entry {
+            border-left: 2px solid var(--border-color);
+            padding-left: 10px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .log-entry.success {
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .log-entry.error {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+
+        .log-entry.info {
+            border-color: var(--accent-primary);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
+            margin-bottom: 8px;
+        }
+
+        .status-badge.active {
+            color: var(--success);
+            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+
+        /* Glassmorphism utility */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        [data-theme="dark"] .glass {
+            background: rgba(15, 23, 42, 0.7);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Left Side: Form -->
+        <div class="card glass">
+            <div class="header">
+                <h2><i class="fas fa-database text-primary me-2"></i> Importar Acreditados</h2>
+                <button class="theme-toggle" id="themeToggle" title="Cambiar Tema">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+
+            <form id="importForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="form-label" for="server">Servidor Base de Datos</label>
+                    <input type="text" class="form-control" id="server" name="server" value="db" placeholder="IP o Host"
+                        required>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <div class="form-group">
+                        <label class="form-label" for="port">Puerto</label>
+                        <input type="text" class="form-control" id="port" name="port" value="1433">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="user">Usuario SQL</label>
+                        <input type="text" class="form-control" id="user" name="user" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Contraseña</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="file">Archivo ZIP</label>
+                    <input type="file" class="form-control" id="file" name="file" accept=".zip" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="zip_password">Contraseña ZIP (Opcional)</label>
+                    <input type="password" class="form-control" id="zip_password" name="zip_password">
+                </div>
+
+
+                <button type="submit" class="btn-primary" id="submitBtn">
+                    <i class="fas fa-file-import"></i>
+                    <span>Iniciar Importación</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- Right Side: Status -->
+        <div class="progress-side">
+            <div class="stat-card glass">
+                <div class="status-badge" id="statusBadge">Listo para importar</div>
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 4px;" id="progressText">0% Completado</h3>
+                <div class="progress-container" id="progressBarContainer">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <p style="font-size: 13px; color: var(--text-muted);" id="statusMessage">Esperando archivo...</p>
+            </div>
+
+            <div class="card glass" style="flex-grow: 1; padding: 24px;">
+                <h3
+                    style="font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
+                    Log de Actividad
+                </h3>
+                <div class="log-container" id="processLog">
+                    <div class="log-entry info">Sistema inicializado. Esperando comandos...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- UI Interactions ---
+        const html = document.documentElement;
+        const themeToggle = document.getElementById('themeToggle');
+
+        // Theme Management
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            const icon = themeToggle.querySelector('i');
+            icon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+        }
+
+        // --- Data Persistence ---
+        const inputs = ['server', 'port', 'user', 'password', 'zip_password'];
+        window.addEventListener('load', () => {
+            inputs.forEach(id => {
+                const val = localStorage.getItem(id);
+                if (val) document.getElementById(id).value = val;
+            });
+        });
+
+        inputs.forEach(id => {
+            document.getElementById(id).addEventListener('input', (e) => {
+                localStorage.setItem(id, e.target.value);
+            });
+        });
+
+        // --- Import Logic ---
+        document.getElementById('importForm').onsubmit = async function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const progressBar = document.getElementById('progressBar');
+            const progressContainer = document.getElementById('progressBarContainer');
+            const statusMessage = document.getElementById('statusMessage');
+            const progressText = document.getElementById('progressText');
+            const processLog = document.getElementById('processLog');
+            const submitBtn = document.getElementById('submitBtn');
+            const statusBadge = document.getElementById('statusBadge');
+
+            // Reset States
+            progressContainer.style.display = 'block';
+            progressBar.style.width = '0%';
+            progressText.innerText = 'Iniciando...';
+            statusMessage.innerText = 'Preparando entorno...';
+            statusBadge.innerText = 'En Curso';
+            statusBadge.className = 'status-badge active';
+            submitBtn.disabled = true;
+            processLog.innerHTML = '';
+
+            try {
+                const response = await fetch('/import', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    const chunk = decoder.decode(value);
+                    const lines = chunk.split('\n');
+
+                    lines.forEach(line => {
+                        if (line.startsWith('data: ')) {
+                            const message = line.substring(6).trim();
+
+                            if (message.startsWith('Progress:')) {
+                                const parts = message.match(/\((\d+)%\)/);
+                                if (parts && parts[1]) {
+                                    const percent = parts[1];
+                                    progressBar.style.width = percent + '%';
+                                    progressText.innerText = percent + '% Completado';
+                                }
+                                statusMessage.innerText = message;
+                            }
+                            else if (message.startsWith('Success:')) {
+                                progressBar.style.width = '100%';
+                                progressBar.style.background = 'var(--success)';
+                                statusBadge.innerText = 'Completado';
+                                statusBadge.className = 'status-badge';
+                                addLogEntry(message, 'success');
+                                submitBtn.disabled = false;
+                            }
+                            else if (message.startsWith('Error:')) {
+                                progressBar.style.background = 'var(--danger)';
+                                statusBadge.innerText = 'Error';
+                                statusBadge.className = 'status-badge';
+                                addLogEntry(message, 'error');
+                                submitBtn.disabled = false;
+                            }
+                            else if (message.startsWith('Log:')) {
+                                addLogEntry(message.substring(4), 'info');
+                            }
+                        }
+                    });
+                }
+
+            } catch (error) {
+                addLogEntry('Error de Red: ' + error.message, 'error');
+                submitBtn.disabled = false;
+            }
+        };
+
+        function addLogEntry(text, type) {
+            const processLog = document.getElementById('processLog');
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.innerText = `> ${text}`;
+            processLog.prepend(entry);
+        }
+    </script>
+</body>
+
+</html>

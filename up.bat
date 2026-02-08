@@ -1,5 +1,4 @@
 @echo off
-echo Iniciando entorno de pruebas...
-cd test
+echo Iniciando entorno de produccion/desarrollo...
 docker-compose up --build
 pause

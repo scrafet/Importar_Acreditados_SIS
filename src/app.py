@@ -26,46 +26,6 @@ def get_db_connection(server, port, user, password, database):
     conn_str = f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server},{port};DATABASE={database};UID={user};PWD={password}'
     return pyodbc.connect(conn_str)
 
-def process_iterative(cursor, row):
-    """
-    Strategy 1: Row-by-Row (Legacy simulation)
-    Checks if record exists, then Updates or Inserts.
-    """
-    # Map CSV fields (assuming order based on VB6 logic/SP)
-    # 0: idSiasis, 1: Codigo ...
-    id_siasis = row[0]
-    codigo = row[1]
-
-    # Check existence
-    cursor.execute("SELECT 1 FROM SisFiliaciones WHERE idSiasis = ? AND Codigo = ?", id_siasis, codigo)
-    exists = cursor.fetchone()
-
-    if exists:
-        # UPDATE
-        sql = """
-            UPDATE SisFiliaciones SET
-                AfiliacionDisa=?, AfiliacionTipoFormato=?, AfiliacionNroFormato=?,
-                AfiliacionNroIntegrante=?, DocumentoTipo=?, CodigoEstablAdscripcion=?,
-                AfiliacionFecha=?, Paterno=?, Materno=?, Pnombre=?, Onombres=?,
-                Genero=?, Fnacimiento=?, IdDistritoDomicilio=?, Estado=?, Fbaja=?,
-                DocumentoNumero=?, MotivoBaja=?
-            WHERE idSiasis=? AND Codigo=?
-        """
-        # Params: columns 2-19, then 0, 1
-        params = row[2:20] + [id_siasis, codigo]
-        cursor.execute(sql, params)
-    else:
-        # INSERT
-        sql = """
-            INSERT INTO SisFiliaciones (
-                idSiasis, Codigo, AfiliacionDisa, AfiliacionTipoFormato, AfiliacionNroFormato,
-                AfiliacionNroIntegrante, DocumentoTipo, CodigoEstablAdscripcion,
-                AfiliacionFecha, Paterno, Materno, Pnombre, Onombres,
-                Genero, Fnacimiento, IdDistritoDomicilio, Estado, Fbaja,
-                DocumentoNumero, MotivoBaja
-            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
-        """
-        cursor.execute(sql, row[:20])
 
 def process_bulk(cursor, rows):
     """
@@ -174,7 +134,6 @@ def import_data():
         user = request.form['user']
         password = request.form['password']
         zip_password = request.form.get('zip_password', '')
-        strategy = request.form.get('strategy', 'iterative')
 
     except Exception as e:
          return jsonify({'status': 'error', 'message': f'Error validando parámetros: {str(e)}'})
@@ -237,38 +196,25 @@ def import_data():
                 with open(target_file, 'r', encoding='latin-1') as f:
                     reader = csv.reader(f)
                     
-                    if strategy == 'bulk':
-                        BATCH_SIZE = 5000
-                        yield f"data: Log: Iniciando carga Bulk (Lote: {BATCH_SIZE})...\n\n"
-                        
-                        for row in reader:
-                            if len(row) >= 20:
-                                rows_buffer.append(row[:20])
-                                processed_count += 1
+                    BATCH_SIZE = 5000
+                    yield f"data: Log: Iniciando carga Bulk (Lote: {BATCH_SIZE})...\n\n"
+                    
+                    for row in reader:
+                        if len(row) >= 20:
+                            rows_buffer.append(row[:20])
+                            processed_count += 1
 
-                                if len(rows_buffer) >= BATCH_SIZE:
-                                    process_bulk(cursor, rows_buffer)
-                                    conn.commit()
-                                    process_percent = int((processed_count / total_lines) * 100) if total_lines > 0 else 0
-                                    yield f"data: Progress: {processed_count} registros procesados ({process_percent}%)\n\n"
-                                    rows_buffer = []
+                            if len(rows_buffer) >= BATCH_SIZE:
+                                process_bulk(cursor, rows_buffer)
+                                conn.commit()
+                                process_percent = int((processed_count / total_lines) * 100) if total_lines > 0 else 0
+                                yield f"data: Progress: {processed_count} registros procesados ({process_percent}%)\n\n"
+                                rows_buffer = []
 
-                        if rows_buffer:
-                            process_bulk(cursor, rows_buffer)
-                            conn.commit()
-                            yield f"data: Log: Procesando bloque final de {len(rows_buffer)} registros...\n\n"
-
-                    else: # iterative
-                        yield f"data: Log: Iniciando carga Iterativa...\n\n"
-                        for row in reader:
-                            if len(row) >= 20:
-                                process_iterative(cursor, row[:20])
-                                processed_count += 1
-                                if processed_count % 100 == 0:
-                                    conn.commit()
-                                    process_percent = int((processed_count / total_lines) * 100) if total_lines > 0 else 0
-                                    yield f"data: Progress: {processed_count} registros procesados ({process_percent}%)\n\n"
+                    if rows_buffer:
+                        process_bulk(cursor, rows_buffer)
                         conn.commit()
+                        yield f"data: Log: Procesando bloque final de {len(rows_buffer)} registros...\n\n"
 
                 conn.close()
                 yield f"data: Success: Proceso finalizado. Total importado: {processed_count}\n\n"
@@ -288,4 +234,4 @@ def import_data():
     return Response(stream_with_context(generate()), mimetype='text/event-stream')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=8080)

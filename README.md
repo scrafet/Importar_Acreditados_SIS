@@ -2,70 +2,53 @@
 
 Este proyecto es una aplicación Python diseñada para gestionar la importación de acreditados del SIS (Seguro Integral de Salud). Incluye un entorno de despliegue contenerizado con Docker que simula la infraestructura de base de datos necesaria.
 
-## Estructura del Proyecto
+## Estructura del Proyecto (Profesional)
 
-*   `app.py`: Aplicación principal (Flask/Python).
-*   `Dockerfile`: Definición de la imagen Docker para la aplicación.
-*   `test/`: Carpeta que contiene la configuración para el despliegue local y pruebas.
-    *   `docker-compose.yml`:Orquestación de servicios (App + Base de Datos SQL Server).
-    *   `db-init/`: Scripts SQL para inicializar la base de datos (creación de tablas y procedimientos).
+*   `src/`: Código fuente de la aplicación.
+    *   `app.py`: Aplicación principal (Flask).
+    *   `templates/`: Plantillas HTML.
+*   `docker/`: Archivos de configuración de infraestructura.
+    *   `db-init/`: Scripts SQL para inicializar la base de datos.
+*   `Dockerfile`: Definición de la imagen Docker para la aplicación (usa `src/`).
+*   `docker-compose.yml`: Orquestación de servicios (App + SQL Server) situada en la raíz.
 
 ## Requisitos Previos
 
 *   [Docker Desktop](https://www.docker.com/products/docker-desktop) instalado y corriendo.
-*   Git (opcional, para clonar el repositorio).
+*   Git (opcional).
 
-## Despliegue y Ejecución (Entorno de Pruebas)
+## Despliegue y Ejecución
 
-El entorno de pruebas levanta una instancia de SQL Server y la aplicación Python conectada a ella.
+El entorno levanta una instancia de SQL Server y la aplicación Python conectada a ella. Todo se gestiona desde la raíz del proyecto.
 
-### Paso 1: Ubicarse en el directorio correcto
+### Paso 1: Iniciar los servicios
 
-La configuración de Docker Compose se encuentra en la carpeta `test`. **Es crucial ejecutar los comandos desde este directorio.**
-
-```bash
-cd test
-```
-
-### Paso 2: Iniciar los servicios
-
-Ejecuta el siguiente comando para construir la imagen y levantar los contenedores:
+Desde la raíz del proyecto, ejecuta:
 
 ```bash
 docker-compose up --build
 ```
 
-**Que sucederá:**
-1.  Se descargará la imagen de SQL Server 2019.
-2.  Se construirá la imagen de la aplicación Python usando el `Dockerfile` en la raíz.
-3.  Se iniciará el contenedor de base de datos (`db`).
-4.  **Importante:** Un servicio auxiliar (`db-init`) esperará a que la base de datos esté lista y ejecutará automáticamente los scripts SQL ubicados en `test/db-init/`. Verás logs indicando el progreso de cada script (`00_create_dbs.sql`, `01_SIGH.sql`, etc.).
-5.  Finalmente, la aplicación (`app`) iniciará y se conectará a la base de datos.
-6.  La aplicación estará disponible en `http://localhost:5000`.
+**Qué sucede:**
+1.  Se descarga la imagen de SQL Server 2019.
+2.  Se construye la imagen de la aplicación Python copiando el contenido de `src/`.
+3.  Se inicia el contenedor de base de datos (`db`).
+4.  Un servicio auxiliar (`db-init`) ejecuta automáticamente los scripts en `docker/db-init/` para crear las tablas y procedimientos.
+5.  La aplicación se conecta a la base de datos.
+6.  La aplicación estará disponible en `http://localhost:8080`.
 
-### Paso 3: Verificar el despliegue
+### Paso 2: Verificar el despliegue
 
-*   **Aplicación web:** Abre tu navegador y visita `http://localhost:5000`. Deberías ver la interfaz de usuario.
-*   **Base de datos:** Puedes conectarte a la base de datos usando cualquier cliente SQL (como SSMS o DBeaver) con las siguientes credenciales:
+*   **Aplicación web:** `http://localhost:8080`.
+*   **Base de datos:**
     *   **Host:** `localhost`
     *   **Puerto:** `14333`
     *   **Usuario:** `sa`
     *   **Contraseña:** `YourStrong@Passw0rd`
 
-## Pruebas
-
-Una vez desplegado el entorno, puedes realizar las siguientes pruebas:
-
-1.  **Carga de Archivos:** Usa la interfaz web para subir los archivos de acreditados y verificar que se procesen correctamente.
-2.  **Verificación en BD:** Conecta tu cliente SQL y verifica que las tablas en las bases de datos `SIGH`, `BDHIS_MINSA`, etc., se hayan poblado o actualizado según la lógica de la aplicación.
-
-## Solución de Problemas Comunes
-
-*   **Error: `no configuration file provided: not found`**:
-    *   Esto ocurre si intentas ejecutar `docker-compose up` desde la raíz del proyecto. Asegúrate de estar dentro de la carpeta `test/` (`cd test`).
+## Solución de Problemas
 
 *   **La base de datos está vacía**:
-    *   Revisa los logs del servicio `db-init` en la terminal. Si hubo un error en los scripts SQL, aparecerá allí. El servicio `db-init` está diseñado para ejecutar los scripts secuencialmente.
-
-*   **Conexión fallida desde la App**:
-    *   Asegúrate de que el contenedor `db` esté marcado como `healthy`. La aplicación depende de que la base de datos esté lista.
+    *   Revisa los logs del servicio `db-init`. El servicio ejecuta los scripts secuencialmente.
+*   **Conexión fallida**:
+    *   Asegúrate de que el contenedor `db` esté marcado como `healthy`.
