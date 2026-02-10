@@ -6,8 +6,21 @@ import shutil
 import csv
 import io
 import time
+import logging
+from datetime import datetime
+import traceback
 
 app = Flask(__name__)
+
+# LOGGING CONFIGURATION
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler() # Output to console (Docker logs)
+    ]
+)
+logger = logging.getLogger(__name__)
 
 # Configuration
 UPLOAD_FOLDER = 'uploads'
@@ -23,17 +36,14 @@ if not os.path.exists(EXTRACT_FOLDER):
 def get_db_connection(server, port, user, password, database):
     # Driver needs to match what is installed in Dockerfile (msodbcsql17)
     # Syntax for server with port is usually "server,port"
-    conn_str = f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server},{port};DATABASE={database};UID={user};PWD={password}'
+    conn_str = f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server},{port};DATABASE={database};UID={user};PWD={password};TrustServerCertificate=yes'
     return pyodbc.connect(conn_str)
 
 
-def process_bulk(cursor, rows):
-    """
-    Strategy 2: Bulk Import (Optimized)
-    Inserts into a Temp Table then merges.
-    """
-    # 1. Create Temp Table
+def create_temp_table(cursor):
+    """Creates the temp table for staging data."""
     cursor.execute("""
+        IF OBJECT_ID('tempdb..#SisFiliacionesTemp') IS NOT NULL DROP TABLE #SisFiliacionesTemp;
         CREATE TABLE #SisFiliacionesTemp (
             idSiasis int, Codigo varchar(2), AfiliacionDisa varchar(3),
             AfiliacionTipoFormato varchar(2), AfiliacionNroFormato varchar(10),
@@ -46,7 +56,8 @@ def process_bulk(cursor, rows):
         )
     """)
 
-    # 2. Bulk Insert into Temp
+def process_bulk(cursor, rows):
+    """Inserts a batch of rows into the staging temp table."""
     sql_insert_temp = """
         INSERT INTO #SisFiliacionesTemp (
             idSiasis, Codigo, AfiliacionDisa, AfiliacionTipoFormato, AfiliacionNroFormato,
@@ -56,11 +67,12 @@ def process_bulk(cursor, rows):
             DocumentoNumero, MotivoBaja
         ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
     """
-    # pyodbc fast_executemany
     cursor.fast_executemany = True
     cursor.executemany(sql_insert_temp, rows)
 
-    # 3. Merge Logic (Update existing)
+def finalize_import(cursor):
+    """Merges data from temp table to final table and cleans up."""
+    # 1. Update existing records
     sql_update = """
         UPDATE T
         SET
@@ -87,7 +99,7 @@ def process_bulk(cursor, rows):
     """
     cursor.execute(sql_update)
 
-    # 4. Insert New
+    # 2. Insert new records
     sql_insert = """
         INSERT INTO SisFiliaciones (
             idSiasis, Codigo, AfiliacionDisa, AfiliacionTipoFormato, AfiliacionNroFormato,
@@ -109,7 +121,7 @@ def process_bulk(cursor, rows):
     """
     cursor.execute(sql_insert)
 
-    # 5. Cleanup
+    # 3. Cleanup
     cursor.execute("DROP TABLE #SisFiliacionesTemp")
 
 @app.route('/')
@@ -134,30 +146,59 @@ def import_data():
         user = request.form['user']
         password = request.form['password']
         zip_password = request.form.get('zip_password', '')
+        delimiter = request.form.get('delimiter', ',')
+        
+        # Handle special char for Tab if sent as string "TAB" (optional, but good for UI)
+        if delimiter == 'TAB': 
+            delimiter = '\t'
+        elif delimiter == 'OTHER':
+            delimiter = request.form.get('other_delimiter', ',')
+            if not delimiter: delimiter = ',' # Fallback to comma if empty
+
+        if not file or not file.filename.endswith('.zip'):
+             return jsonify({'status': 'error', 'message': 'Formato de archivo inválido. Debe ser .zip'})
+
+        # Save File BEFORE generator starts to avoid "read of closed file" error
+        # request context might close the file stream once the generator starts yielding
+        filepath = os.path.join(upload_folder, file.filename)
+        try:
+            file.save(filepath)
+        except Exception as e:
+            logger.error(f"Error saving file: {e}")
+            return jsonify({'status': 'error', 'message': f'Error guardando archivo: {str(e)}'})
 
     except Exception as e:
-         return jsonify({'status': 'error', 'message': f'Error validando parámetros: {str(e)}'})
+         return jsonify({'status': 'error', 'message': f'Error validando/guardando: {str(e)}'})
 
     def generate():
-        try:
-            if not file or not file.filename.endswith('.zip'):
-                yield f"data: Error: Invalid file format\n\n"
-                return
+        def log_step(message, level="INFO"):
+            """Helper to log to console and yield to frontend with timestamp"""
+            timestamp = datetime.now().strftime("%H:%M:%S")
+            full_msg = f"[{timestamp}] {message}"
+            
+            # Log to Backend (Console)
+            if level == "ERROR":
+                logger.error(message)
+            else:
+                logger.info(message)
+                
+            # Yield to Frontend (SSE)
+            return f"data: Log: {full_msg}\n\n"
 
-            # Save File
-            filepath = os.path.join(upload_folder, file.filename)
-            file.save(filepath)
-            yield f"data: Log: Archivo subido. Iniciando extracción...\n\n"
+        try:
+            # File is already saved at 'filepath'
+            yield log_step("Archivo subido y guardado. Iniciando extracción...")
 
             try:
                 # Extract ZIP
+                yield log_step("Descomprimiendo archivo ZIP...")
                 with zipfile.ZipFile(filepath, 'r') as zip_ref:
                     if zip_password:
                         zip_ref.extractall(EXTRACT_FOLDER, pwd=bytes(zip_password, 'utf-8'))
                     else:
                         zip_ref.extractall(EXTRACT_FOLDER)
                 
-                yield f"data: Log: Archivo extraído correctamente.\n\n"
+                yield log_step("Archivo extraído correctamente.")
 
                 extracted_files = os.listdir(EXTRACT_FOLDER)
                 if not extracted_files:
@@ -169,35 +210,46 @@ def import_data():
                     return
 
                 target_file = os.path.join(EXTRACT_FOLDER, extracted_files[0])
-                yield f"data: Log: Procesando archivo: {extracted_files[0]}\n\n"
+                yield log_step(f"Procesando archivo objetivo: {extracted_files[0]}")
 
                 # Connect to DB
-                yield f"data: Log: Conectando a Base de Datos {server}:{port}...\n\n"
+                yield log_step(f"Intentando conectar a SQL Server en {server}:{port}...")
                 
                 # Small delay to ensure UI updates
                 time.sleep(0.5) 
                 
                 conn = get_db_connection(server, port, user, password, 'SIGH_EXTERNA')
                 cursor = conn.cursor()
-                yield f"data: Log: Conexión establecida.\n\n"
+                yield log_step("Conexión a Base de Datos establecida.")
+
+                # PHASE 1: Create Temp Table
+                yield log_step("Creando tabla temporal en base de datos...")
+                create_temp_table(cursor)
+                conn.commit()
 
                 processed_count = 0
                 rows_buffer = []
 
                 # Count total lines
                 total_lines = 0
+                yield log_step("Analizando archivo para estimar registros...")
                 try:
                      with open(target_file, 'r', encoding='latin-1') as f:
-                        for _ in f: total_lines += 1
+                        for i, _ in enumerate(f): 
+                            total_lines += 1
                 except:
                     pass
-                yield f"data: Log: Total líneas estimadas: {total_lines}\n\n"
+                yield log_step(f"Total líneas estimadas: {total_lines}")
 
+                # Start timer
+                start_time = time.time()
+
+                # PHASE 2: Bulk Insert into Temp Table
                 with open(target_file, 'r', encoding='latin-1') as f:
-                    reader = csv.reader(f)
+                    reader = csv.reader(f, delimiter=delimiter)
                     
-                    BATCH_SIZE = 5000
-                    yield f"data: Log: Iniciando carga Bulk (Lote: {BATCH_SIZE})...\n\n"
+                    BATCH_SIZE = 6000
+                    yield log_step(f"Iniciando carga a tabla temporal (Lote: {BATCH_SIZE})...")
                     
                     for row in reader:
                         if len(row) >= 20:
@@ -207,27 +259,48 @@ def import_data():
                             if len(rows_buffer) >= BATCH_SIZE:
                                 process_bulk(cursor, rows_buffer)
                                 conn.commit()
-                                process_percent = int((processed_count / total_lines) * 100) if total_lines > 0 else 0
-                                yield f"data: Progress: {processed_count} registros procesados ({process_percent}%)\n\n"
+                                process_percent = int((processed_count / total_lines) * 90) if total_lines > 0 else 0
+                                yield f"data: Progress: {processed_count} en tabla temporal ({process_percent}%)\n\n"
                                 rows_buffer = []
 
                     if rows_buffer:
                         process_bulk(cursor, rows_buffer)
                         conn.commit()
-                        yield f"data: Log: Procesando bloque final de {len(rows_buffer)} registros...\n\n"
 
+                # PHASE 3: Merge from Temp to Final
+                yield log_step("Carga temporal finalizada. Iniciando migración a tabla final sisFiliaciones...")
+                finalize_import(cursor)
+                conn.commit()
+                
                 conn.close()
-                yield f"data: Success: Proceso finalizado. Total importado: {processed_count}\n\n"
+                
+                # Final progress update 100%
+                yield f"data: Progress: {processed_count} registros procesados (100%)\n\n"
+                
+                # Calculate duration
+                elapsed_seconds = time.time() - start_time
+                elapsed_minutes = round(elapsed_seconds / 60, 2)
+                
+                success_msg = f"Se importó correctamente {processed_count} registros en {elapsed_minutes} minutos."
+                yield log_step(success_msg)
+                yield f"data: Success: {success_msg}\n\n"
 
                 # Cleanup
+                yield log_step("Limpiando archivos temporales...")
                 shutil.rmtree(EXTRACT_FOLDER)
                 os.makedirs(EXTRACT_FOLDER)
                 os.remove(filepath)
+                yield log_step("Proceso finalizado.")
 
             except Exception as e:
+                err_msg = f"Error Interno: {str(e)}"
+                logger.error(err_msg)
+                logger.error(traceback.format_exc())
+                yield log_step(err_msg, level="ERROR")
                 yield f"data: Error: {str(e)}\n\n"
                 
         except Exception as e:
+            logger.error(f"Fatal Error: {str(e)}")
             yield f"data: Error: {str(e)}\n\n"
 
     # Use stream_with_context to keep request valid

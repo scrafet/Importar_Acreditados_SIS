@@ -1,3 +1,2 @@
-Flask==2.2.3
-pyodbc==4.0.39
-Werkzeug==2.2.3
+Flask
+pyodbc

@@ -23,18 +23,17 @@ docker-compose up --build
 
 **Qué sucede:**
 1.  Se construye la imagen de la aplicación Python optimizada.
-### Paso 2: Configuración de Base de Datos
-La aplicación requiere un servidor SQL Server externo (o uno ya existente en tu red). 
-1. Asegúrate de que la tabla `SisFiliaciones` esté creada en el servidor destino.
-2. Ingresa la IP, puerto y credenciales del servidor en la interfaz web de la aplicación.
-
-### Paso 2: Verificar el despliegue
-
-*   **Aplicación web:** `http://localhost:44321`.
+### Paso 2: Ejecución e Importación
+1. Accede a la aplicación en `http://localhost:44321`.
+2. Ingresa los datos de tu servidor **MSSQL 2012** (IP, Puerto, Usuario, Password).
+3. Sube el archivo `.zip` con los acreditados.
+4. La aplicación creará una tabla temporal `#` en el servidor destino, realizará la carga y luego el merge final.
 
 ## Solución de Problemas
 
-*   **La base de datos está vacía**:
-    *   Revisa los logs del servicio `db-init`. El servicio ejecuta los scripts secuencialmente.
-*   **Conexión fallida**:
-    *   Asegúrate de que el contenedor `db` esté marcado como `healthy`.
+*   **Error de inicio de sesión (18456)**:
+    *   Verifica que el usuario SQL tenga permisos de creación de tablas temporales y escritura en la tabla final.
+*   **Protocolo de Seguridad (SSL/TLS)**:
+    *   La imagen está preconfigurada para soportar TLSv1.0 y niveles de seguridad reducidos compatibles con SQL 2012.
+*   **Conexión Rechazada**:
+    *   Confirma que el servidor SQL permita conexiones remotas y que el puerto esté abierto en el firewall.
